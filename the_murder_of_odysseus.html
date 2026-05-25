@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Murder of Odysseus: How One Translator Rewrote a Hero</title>
+  <style>
+    :root {
+      --ink:        #14142b;
+      --ink-2:      #1f1f3d;
+      --ink-soft:   #2a2a4a;
+      --paper:      #faf7ef;
+      --paper-2:    #f4efe1;
+      --paper-3:    #efe9d4;
+      --gold:       #c9a84c;
+      --gold-2:     #b8932f;
+      --gold-dim:   #e8d9a8;
+      --rust:       #8b3a2a;
+      --rust-soft:  #b85a48;
+      --wine:       #6b1c2f;
+      --slate:      #4a5568;
+      --slate-soft: #6b7280;
+      --muted:      #5a5a5a;
+      --divider:    #ddd5c0;
+      --divider-2:  #ebe5cf;
+      --card-bg:    #ffffff;
+      --pos:        #2d8659;
+      --neg:        #b04a3a;
+      --mid:        #d99020;
+      --hist:       #8a7958;
+      --hl-yellow:  rgba(255, 224, 0, 0.55);
+      --hl-yellow-2:rgba(255, 224, 0, 0.82);
+      --hl-green:   rgba(120, 200, 120, 0.45);
+      --hl-green-2: rgba(120, 200, 120, 0.65);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, 'Times New Roman', serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .sans { font-family: 'Inter', 'Helvetica Neue', system-ui, -apple-system, sans-serif; }
+
+    /* ── HERO ── */
+    header.hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse at 18% 10%, rgba(201,168,76,.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 88% 110%, rgba(107,28,47,.32) 0%, transparent 55%),
+        linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+      color: var(--paper);
+      padding: 5.5rem 2rem 4.5rem;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+      overflow: hidden;
+    }
+    header.hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.014) 0 2px, transparent 2px 6px);
+      pointer-events: none;
+    }
+    header.hero .greek {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: 1.05rem;
+      letter-spacing: .22em;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      text-transform: uppercase;
+    }
+    header.hero h1 {
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, serif;
+      font-size: clamp(2.6rem, 8vw, 5.4rem);
+      font-weight: 500;
+      letter-spacing: -.01em;
+      line-height: 1.0;
+      margin: 0 auto .9rem;
+      max-width: 1000px;
+    }
+    header.hero h1 .accent { color: var(--rust-soft); font-style: italic; }
+    header.hero .dek {
+      font-style: italic;
+      color: rgba(232,217,168,.88);
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+    header.hero .hero-meta {
+      margin-top: 1.8rem;
+      font-size: .72rem;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .14em;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      text-transform: uppercase;
+    }
+    header.hero .hero-meta a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,.35); }
+    header.hero .hero-meta a:hover { border-bottom-color: var(--gold); }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 1180px) {
+      main {
+        max-width: 1420px;
+        grid-template-columns: 200px 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+    }
+    .main-col { min-width: 0; }   /* prevent grid blowout from wide diff cells */
+
+    /* ── SIDEBAR NAV (sticky, colorful, hidden on narrow) ── */
+    .sidenav {
+      display: none;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: .82rem;
+    }
+    @media (min-width: 1180px) {
+      .sidenav {
+        display: block;
+        position: sticky;
+        top: 1.6rem;
+        align-self: start;
+        padding: 1.1rem 0 1.2rem;
+        background:
+          linear-gradient(180deg, rgba(94,58,143,.06) 0%, transparent 35%),
+          var(--paper);
+        border: 1px solid var(--divider);
+        border-radius: 10px;
+        box-shadow: 0 1px 0 rgba(20,20,43,.03), 0 6px 18px rgba(20,20,43,.04);
+      }
+    }
+    .sidenav-label {
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #5e3a8f;
+      font-weight: 800;
+      padding: 0 1.2rem .6rem;
+      margin-bottom: .35rem;
+      border-bottom: 1px dashed rgba(94,58,143,.22);
+    }
+    .sidenav ul { list-style: none; padding: 0 .55rem; margin: 0; }
+    .sidenav li { margin: .12rem 0; }
+    .sidenav a {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .5rem .8rem;
+      color: var(--slate);
+      text-decoration: none;
+      border-radius: 7px;
+      font-weight: 500;
+      letter-spacing: .005em;
+      line-height: 1.25;
+      transition: color .18s ease, background .18s ease, transform .18s ease;
+      position: relative;
+    }
+    .sidenav a:hover {
+      color: var(--ink);
+      background: rgba(201,168,76,.10);
+      transform: translateX(2px);
+    }
+    .sn-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px currentColor;
+      background: currentColor;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .sn-num {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-style: italic;
+      font-size: .82rem;
+      color: var(--slate-soft);
+      width: 18px;
+      flex-shrink: 0;
+      font-weight: 400;
+    }
+    .sn-label { flex: 1; }
+    /* per-item color (used by .sn-dot via currentColor) */
+    .sidenav li.sn-c00 { color: var(--gold-2); }
+    .sidenav li.sn-c01 { color: var(--rust); }
+    .sidenav li.sn-c02 { color: #c47a1a; }   /* amber */
+    .sidenav li.sn-c03 { color: var(--wine); }
+    .sidenav li.sn-c04 { color: #4a2160; }   /* deep purple */
+    .sidenav li.sn-c05 { color: #2d6a8f; }   /* teal */
+    .sidenav li.sn-cR  { color: var(--ink); }
+    .sidenav a.active {
+      background: linear-gradient(90deg, rgba(94,58,143,.18), rgba(94,58,143,.04));
+      color: #4a2160;
+      font-weight: 700;
+      box-shadow: inset 3px 0 0 #5e3a8f;
+    }
+    .sidenav a.active .sn-dot {
+      background: #5e3a8f;
+      box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px #5e3a8f, 0 0 0 7px rgba(94,58,143,.18);
+      transform: scale(1.05);
+    }
+    .sidenav a.active .sn-num { color: #5e3a8f; font-weight: 600; }
+    @media (prefers-reduced-motion: reduce) {
+      .sidenav a, .sn-dot { transition: none; }
+      .sidenav a:hover { transform: none; }
+    }
+
+    /* ── OVERVIEW CHAPTER spacing ── */
+    .chapter.ch-overview { margin-top: 1rem; margin-bottom: 3.5rem; }
+    .chapter.ch-overview .ch-num { color: var(--gold-2); }
+    .chapter.ch-overview .translations-table { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+
+    /* ── OVERVIEW TABLE (collapsible) ── */
+    details.translations-table {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--divider);
+      padding-bottom: 2rem;
+    }
+    details.translations-table > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: .3rem 0 1rem;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 600;
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: color .15s;
+    }
+    details.translations-table > summary:hover { color: var(--ink); }
+    details.translations-table > summary::-webkit-details-marker { display: none; }
+    details.translations-table > summary::before {
+      content: '▸';
+      font-size: .85rem;
+      color: var(--gold-2);
+      transition: transform .2s;
+      display: inline-block;
+    }
+    details.translations-table[open] > summary::before { transform: rotate(90deg); }
+
+    .overview-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+    .overview-table thead th {
+      text-align: left;
+      padding: .65rem .85rem;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      border-bottom: 2px solid var(--ink);
+      background: var(--paper-2);
+    }
+    .overview-table thead th.center { text-align: center; }
+    .trans-row {
+      cursor: pointer;
+      border-bottom: 1px solid var(--divider);
+      transition: background .15s;
+      user-select: none;
+    }
+    .trans-row:hover { background: rgba(201,168,76,.08); }
+    .trans-row.expanded { background: rgba(20,20,43,.04); }
+    .trans-row td { padding: .65rem .85rem; vertical-align: middle; }
+    .trans-row[data-target="wilson"] .tbl-name { background: rgba(139,58,42,.09); border-radius: 14px; padding: 2px 10px; display: inline-block; }
+    .tbl-chevron { width: 22px; text-align: center; color: var(--slate-soft); font-size: .7rem; transition: transform .2s; font-family: 'Inter', sans-serif; }
+    .trans-row.expanded .tbl-chevron { transform: rotate(90deg); color: var(--gold-2); }
+    .tbl-year { color: var(--slate); font-size: .82rem; white-space: nowrap; font-family: 'Inter', sans-serif; font-weight: 500; }
+    .tbl-name { font-weight: 600; font-size: .98rem; color: var(--ink); }
+    .tbl-pub { font-size: .78rem; color: var(--slate); font-family: 'Inter', sans-serif; }
+    .tbl-style { font-size: .78rem; font-style: italic; color: #555; }
+    .tbl-avail { width: 30px; text-align: center; padding: .65rem .3rem !important; }
+    .avail-icon { font-size: .95rem; cursor: default; line-height: 1; }
+    .avail-icon.has { color: var(--pos); }
+    .bar-wrap { display: flex; align-items: center; gap: .55rem; }
+    .bar { height: 8px; border-radius: 4px; background: var(--divider-2); overflow: hidden; width: 120px; flex-shrink: 0; box-shadow: inset 0 1px 1px rgba(0,0,0,.06); }
+    .bar-fill { height: 100%; border-radius: 4px; }
+    .bar-label { font-size: .7rem; color: var(--slate); font-family: 'Inter', 'Helvetica Neue', sans-serif; white-space: nowrap; }
+    .bar-pos  { background: linear-gradient(90deg, var(--pos), #6cb98e); }
+    .bar-mid  { background: linear-gradient(90deg, var(--mid), #f0c460); }
+    .bar-neg  { background: linear-gradient(90deg, var(--neg), #d98a7a); }
+    .bar-hist { background: linear-gradient(90deg, #8a7958, #c2b394); }
+    .bar-thin { background: linear-gradient(90deg, var(--mid), #c8a030); }
+    .tbl-reviews { font-size: .75rem; color: var(--slate); font-family: 'Inter', 'Helvetica Neue', sans-serif; text-align: center; font-weight: 600; }
+    .era-row td {
+      background: var(--ink);
+      color: var(--gold-dim);
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      padding: .35rem .85rem;
+      font-weight: 600;
+    }
+    .details-row { display: none; }
+    .details-row.open { display: table-row; }
+    .details-row > td {
+      padding: 0 !important;
+      background: linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 100%);
+      border-bottom: 2px solid var(--ink);
+    }
+    .details-content { padding: 1.4rem 1.4rem 1.8rem; border-top: 1px solid var(--gold); }
+    .trans-mini { font-family: 'Inter', sans-serif; font-size: .85rem; color: var(--slate); line-height: 1.55; }
+    .trans-mini strong { color: var(--ink); font-weight: 600; }
+
+    /* ── CHAPTER (the main section unit) ── */
+    .chapter {
+      margin: 5.5rem 0 4rem;
+      scroll-margin-top: 1.8rem;
+    }
+    .closer { scroll-margin-top: 1.8rem; }
+    .chapter:first-of-type { margin-top: 3rem; }
+
+    .ch-num {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--rust);
+      line-height: 1;
+      margin-bottom: .4rem;
+      letter-spacing: -.02em;
+    }
+    .ch-title {
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, serif;
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.06;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      max-width: 900px;
+      margin-bottom: .9rem;
+    }
+    .ch-sub {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.45;
+      margin-bottom: 2.4rem;
+    }
+
+    /* ── REFERENCE STRIP ── */
+    .ref-strip {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: .8rem 1.2rem;
+      margin-bottom: .9rem;
+      padding-bottom: .8rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    .ref-strip .ref-loc {
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--rust);
+      white-space: nowrap;
+    }
+    .ref-strip .ref-greek {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #333;
+    }
+    .ref-strip .ref-gloss {
+      font-family: 'Inter', sans-serif;
+      font-size: .78rem;
+      color: var(--slate);
+      flex-basis: 100%;
+      line-height: 1.55;
+    }
+    .ref-strip .ref-gloss strong { color: var(--ink); font-weight: 600; }
+    .ref-strip .gk { font-family: 'Iowan Old Style', Georgia, serif; font-style: italic; }
+
+    /* ── DIFF GRID (the hero element) ── */
+    .diff-hero {
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(20,20,43,.05);
+      margin-bottom: 1.6rem;
+    }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .diff-col {
+      border-right: 1px solid var(--divider);
+      display: flex; flex-direction: column;
+    }
+    .diff-col:last-child { border-right: none; }
+    .diff-col-wilson { background: rgba(139,58,42,.035); }
+    .diff-col-head {
+      background: var(--paper-2);
+      border-bottom: 1px solid var(--divider);
+      padding: .85rem 1rem .8rem;
+      display: flex; flex-direction: column;
+      gap: .35rem;
+    }
+    .diff-col-wilson .diff-col-head { background: rgba(139,58,42,.07); }
+
+    .diff-author-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .6rem;
+    }
+    .diff-author {
+      font-family: 'Inter', sans-serif;
+      font-size: .76rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    /* Wilson's name gets the rounded pill bg */
+    .diff-author.is-wilson {
+      background: rgba(139,58,42,.14);
+      color: var(--wine);
+      padding: 3px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(139,58,42,.22);
+    }
+    .diff-year {
+      font-family: 'Inter', sans-serif;
+      font-size: .68rem;
+      color: var(--gold-2);
+      font-weight: 600;
+    }
+
+    /* Mini academic-consensus bar */
+    .consensus {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      cursor: help;
+      position: relative;
+    }
+    .consensus-bar {
+      width: 56px;
+      height: 5px;
+      background: var(--divider-2);
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.07);
+    }
+    .consensus-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+    .consensus-fill.c-pos { background: linear-gradient(90deg, var(--pos), #6cb98e); }
+    .consensus-fill.c-mid { background: linear-gradient(90deg, var(--mid), #f0c460); }
+    .consensus-fill.c-neg { background: linear-gradient(90deg, var(--neg), #d98a7a); }
+    .consensus-label {
+      font-family: 'Inter', sans-serif;
+      font-size: .64rem;
+      letter-spacing: .02em;
+      color: var(--slate);
+      font-style: italic;
+      white-space: nowrap;
+    }
+    /* Custom tooltip on hover */
+    .consensus::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      right: 0;
+      background: var(--ink);
+      color: var(--gold-dim);
+      padding: .45rem .7rem;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      font-style: normal;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .15s, transform .15s;
+      box-shadow: 0 4px 14px rgba(20,20,43,.2);
+      z-index: 10;
+    }
+    .consensus::before {
+      content: '';
+      position: absolute;
+      bottom: calc(100% + 3px);
+      right: 14px;
+      border: 5px solid transparent;
+      border-top-color: var(--ink);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .15s;
+      z-index: 10;
+    }
+    .consensus:hover::after, .consensus:hover::before { opacity: 1; transform: translateY(0); }
+
+    .diff-body {
+      padding: 1rem 1.1rem 1.15rem;
+      font-size: .93rem;
+      line-height: 1.65;
+      color: #222;
+      flex: 1;
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, serif;
+    }
+    .diff-body p { margin-bottom: .4rem; }
+    .diff-body p.ctx { color: #888; font-size: .85rem; line-height: 1.55; }
+    .diff-body p.hot { color: #1a1a1a; padding: .12rem 0; }
+
+    /* highlighter marks */
+    mark.hl-w {
+      background: linear-gradient(180deg, transparent 0%, transparent 18%, var(--hl-yellow) 18%, var(--hl-yellow) 90%, transparent 90%);
+      color: inherit; padding: 0 2px; border-radius: 1px; font-weight: 500;
+    }
+    mark.hl-a {
+      background: linear-gradient(180deg, transparent 0%, transparent 18%, var(--hl-green) 18%, var(--hl-green) 90%, transparent 90%);
+      color: inherit; padding: 0 2px; border-radius: 1px;
+    }
+    mark.hl-w-strong {
+      background: var(--hl-yellow-2); padding: 0 3px; color: inherit; font-weight: 600; border-radius: 1px;
+    }
+    .gk { font-family: 'Iowan Old Style', Georgia, serif; font-style: italic; }
+
+    @media (max-width: 1024px) {
+      .diff-grid { grid-template-columns: repeat(2, 1fr); }
+      .diff-col:nth-child(2) { border-right: none; }
+      .diff-col:nth-child(1), .diff-col:nth-child(2) { border-bottom: 1px solid var(--divider); }
+    }
+    @media (max-width: 580px) {
+      .diff-grid { grid-template-columns: 1fr; }
+      .diff-col { border-right: none; border-bottom: 1px solid var(--divider); }
+      .diff-col:last-child { border-bottom: none; }
+    }
+
+    /* ── AFTERMATH (Whitaker quotes, demoted) ── */
+    .aftermath {
+      max-width: 820px;
+      margin: 1.4rem 0 0;
+      padding: 0 0 0 1.2rem;
+      border-left: 2px solid var(--gold);
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-weight: 300;
+      font-size: .93rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .aftermath p { margin-bottom: .55rem; font-weight: 300; }
+    .aftermath p strong { color: #2a2a2a; font-weight: 500; }
+    .aftermath em.quote {
+      font-style: italic;
+      color: #404040;
+      background: rgba(255,224,0,.18);
+      padding: 0 4px;
+      border-radius: 2px;
+    }
+    .aftermath .src {
+      display: block;
+      margin-top: .7rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--slate-soft);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ── DISCLOSURE (the "also" pattern) ── */
+    .also-group {
+      margin-top: 2.2rem;
+      border-top: 1px solid var(--divider);
+      padding-top: 1.4rem;
+    }
+    .also-group-label {
+      font-family: 'Inter', sans-serif;
+      font-size: .68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 600;
+      margin-bottom: .8rem;
+    }
+    details.also {
+      border-bottom: 1px solid var(--divider-2);
+      transition: background .15s;
+    }
+    details.also:last-of-type { border-bottom: none; }
+    details.also > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: .9rem .2rem;
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      transition: padding-left .15s;
+    }
+    details.also > summary::-webkit-details-marker { display: none; }
+    details.also > summary:hover { padding-left: .4rem; }
+    .also-chev {
+      color: var(--gold-2);
+      font-size: .85rem;
+      transition: transform .2s;
+      display: inline-block;
+      flex-shrink: 0;
+      width: 14px;
+    }
+    details.also[open] .also-chev { transform: rotate(90deg); }
+    .also-label {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
+      flex: 1;
+    }
+    .also-ref {
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .06em;
+      color: var(--slate);
+      white-space: nowrap;
+    }
+    .also-ref .gk { font-style: italic; font-family: 'Iowan Old Style', Georgia, serif; }
+    .also-body { padding: .4rem 0 1.6rem; }
+
+    /* ── TERM TABLE (for §02) ── */
+    .term-table-wrap {
+      margin-top: 2.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem 1.4rem;
+    }
+    .term-table-wrap h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 700;
+      margin-bottom: .8rem;
+    }
+    table.term-table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+    table.term-table th {
+      text-align: left;
+      padding: .55rem .7rem;
+      background: var(--paper-2);
+      border-bottom: 2px solid var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: .66rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 600;
+    }
+    table.term-table td {
+      padding: .55rem .7rem;
+      border-bottom: 1px solid var(--divider);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    table.term-table td.gk { font-family: 'Iowan Old Style', Georgia, serif; font-style: italic; font-size: .98rem; }
+    table.term-table tr:last-child td { border-bottom: none; }
+
+    /* ── §03 BULLETS ── */
+    .receipts-list {
+      max-width: 880px;
+      margin: 2.2rem 0 0;
+      list-style: none;
+      padding: 0;
+    }
+    .receipts-list li {
+      padding: 1rem 0 1rem 2.4rem;
+      border-bottom: 1px solid var(--divider-2);
+      position: relative;
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: .98rem;
+      line-height: 1.6;
+      color: #2a2a2a;
+    }
+    .receipts-list li:last-child { border-bottom: none; }
+    .receipts-list li::before {
+      content: counter(receipts);
+      counter-increment: receipts;
+      position: absolute;
+      left: 0;
+      top: 1.05rem;
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-style: italic;
+      color: var(--rust);
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+    .receipts-list { counter-reset: receipts; }
+    .receipts-list em.quote {
+      font-style: italic;
+      background: rgba(255,224,0,.22);
+      padding: 0 4px;
+      border-radius: 2px;
+      color: #2a2a2a;
+    }
+
+    /* ── §04 WORD LISTS ── */
+    .word-lists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.4rem;
+    }
+    @media (max-width: 720px) { .word-lists { grid-template-columns: 1fr; } }
+    .word-block {
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-top: 4px solid var(--gold);
+      border-radius: 4px;
+      padding: 1.1rem 1.3rem 1.3rem;
+    }
+    .word-block.contemporary { border-top-color: var(--rust); }
+    .word-block h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 700;
+      margin-bottom: .8rem;
+    }
+    .word-block .word-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem .55rem;
+      font-family: 'Iowan Old Style', Georgia, serif;
+    }
+    .word-block .w {
+      font-style: italic;
+      padding: .15rem .55rem;
+      border-radius: 14px;
+      font-size: .95rem;
+    }
+    .word-block.contemporary .w {
+      background: rgba(139,58,42,.09);
+      color: var(--wine);
+      border: 1px solid rgba(139,58,42,.18);
+    }
+    .word-block.elevated .w {
+      background: rgba(201,168,76,.12);
+      color: #6a4a00;
+      border: 1px solid rgba(201,168,76,.28);
+    }
+    .word-block .ref { font-family: 'Inter', sans-serif; font-style: normal; font-size: .68rem; color: var(--slate-soft); margin-left: 2px; }
+    .word-block .footnote {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: .88rem;
+      line-height: 1.55;
+      color: var(--muted);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+
+    /* ── RECEIPTS / ERRATA CLOSER ── */
+    .closer {
+      margin-top: 6rem;
+      padding-top: 3rem;
+      border-top: 2px solid var(--ink);
+    }
+    .closer-label {
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rust);
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+    .closer h2 {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 500;
+      letter-spacing: -.005em;
+      margin-bottom: .9rem;
+      color: var(--ink);
+    }
+    .closer .lede {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: 1.02rem;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 1.8rem;
+    }
+    details.errata {
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+    }
+    details.errata > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: .02em;
+    }
+    details.errata > summary::-webkit-details-marker { display: none; }
+    details.errata > summary::before {
+      content: '▸';
+      color: var(--gold-2);
+      transition: transform .2s;
+      display: inline-block;
+    }
+    details.errata[open] > summary::before { transform: rotate(90deg); }
+    details.errata > summary:hover { background: rgba(201,168,76,.06); }
+    .errata-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+    .errata-table th {
+      text-align: left;
+      padding: .5rem .9rem;
+      background: var(--paper-2);
+      border-top: 1px solid var(--divider);
+      border-bottom: 2px solid var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: .66rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 600;
+    }
+    .errata-table td {
+      padding: .55rem .9rem;
+      border-bottom: 1px solid var(--divider);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .errata-table tr:last-child td { border-bottom: none; }
+    .errata-table .src-foot { padding: .7rem .9rem; font-family: 'Inter', sans-serif; font-size: .7rem; color: var(--slate-soft); letter-spacing: .06em; background: var(--paper-2); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.6rem 2rem;
+      font-size: .78rem;
+      color: var(--slate);
+      border-top: 1px solid var(--divider);
+      background: var(--paper-2);
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      letter-spacing: .015em;
+    }
+    footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(20,20,43,.2); }
+    footer a:hover { border-bottom-color: var(--ink); }
+
+    /* ── FADE-IN on scroll (subtle) ── */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 640px) {
+      header.hero { padding: 3.5rem 1.2rem 3rem; }
+      .overview-table .hide-narrow { display: none; }
+      .bar { width: 80px; }
+      .ch-num { font-size: 2.2rem; }
+      .ch-title { font-size: 1.85rem; }
+      .term-table-wrap { padding: 1rem; }
+      table.term-table { font-size: .8rem; }
+      table.term-table th, table.term-table td { padding: .4rem .5rem; }
+      .errata-table { font-size: .8rem; }
+      .errata-table th, .errata-table td { padding: .4rem .55rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="greek">Ὁμήρου Ὀδύσσεια</div>
+  <h1>The Murder<br/><span class="accent">of Odysseus</span></h1>
+  <div class="dek">How one translator quietly rewrote the most famous hero in Western literature, and what the Greek actually says.</div>
+  <div class="hero-meta">Based on Richard Whitaker · <a href="https://www.academia.edu/97598353/HOMERS_ODYSSEY_THREE_WAYS_RECENT_TRANSLATIONS" target="_blank" rel="noopener">Acta Classica LXIII · 2020</a></div>
+</header>
+
+<main>
+
+  <nav class="sidenav" aria-label="Section navigation">
+    <div class="sidenav-label">On this page</div>
+    <ul>
+      <li class="sn-c00"><a href="#ch-00"><span class="sn-dot"></span><span class="sn-num">00</span><span class="sn-label">Comparison</span></a></li>
+      <li class="sn-c01"><a href="#ch-01"><span class="sn-dot"></span><span class="sn-num">01</span><span class="sn-label">Recklessness</span></a></li>
+      <li class="sn-c02"><a href="#ch-02"><span class="sn-dot"></span><span class="sn-num">02</span><span class="sn-label">Slaves or aristocrats?</span></a></li>
+      <li class="sn-c03"><a href="#ch-03"><span class="sn-dot"></span><span class="sn-num">03</span><span class="sn-label">…or "girls"?</span></a></li>
+      <li class="sn-c04"><a href="#ch-04"><span class="sn-dot"></span><span class="sn-num">04</span><span class="sn-label">Odysseus the villain</span></a></li>
+      <li class="sn-c05"><a href="#ch-05"><span class="sn-dot"></span><span class="sn-num">05</span><span class="sn-label">Bronze-Age or Netflix?</span></a></li>
+      <li class="sn-cR"><a href="#receipts"><span class="sn-dot"></span><span class="sn-num">·</span><span class="sn-label">The receipts</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="main-col">
+
+  <!-- ══ TRANSLATIONS OVERVIEW TABLE (collapsible) ══ -->
+  <section class="chapter reveal ch-overview" id="ch-00">
+    <div class="ch-num">00.</div>
+    <h2 class="ch-title">A Comparison of the 13 most significant Odyssey translations</h2>
+    <p class="ch-sub">1616–2025 · from George Chapman's Jacobean iambic pentameter to Daniel Mendelsohn's 2025 six-beat line.</p>
+
+  <details class="translations-table" open id="overview">
+    <summary>13 translations · 1616–2025 · click row to expand · click here to collapse table</summary>
+    <table class="overview-table">
+      <thead>
+        <tr>
+          <th style="width:22px"></th>
+          <th>Year</th>
+          <th style="width:22px"></th>
+          <th>Translator</th>
+          <th class="hide-narrow">Style</th>
+          <th class="center">Academic consensus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="era-row"><td colspan="6">Historical</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1616</td><td class="tbl-avail"></td><td><span class="tbl-name">George Chapman</span></td><td class="tbl-style hide-narrow">Iambic pentameter</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-hist" style="width:55%"></div></div><span class="bar-label">Literary-historical</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1725</td><td class="tbl-avail"></td><td><span class="tbl-name">Alexander Pope</span></td><td class="tbl-style hide-narrow">Heroic couplets</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-hist" style="width:45%"></div></div><span class="bar-label">Arnold's critique endures</span></div></td></tr>
+        <tr class="era-row"><td colspan="6">Modern (prose era)</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1946</td><td class="tbl-avail"></td><td><span class="tbl-name">E. V. Rieu</span></td><td class="tbl-style hide-narrow">Plain prose / novelistic</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:62%"></div></div><span class="bar-label">Popular; classicists sceptical</span></div></td></tr>
+        <tr class="era-row"><td colspan="6">Modern (verse translations)</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1961</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Robert Fitzgerald</span></td><td class="tbl-style hide-narrow">Flexible blank verse</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:88%"></div></div><span class="bar-label">Near-universal praise</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1965</td><td class="tbl-avail"></td><td><span class="tbl-name">Richmond Lattimore</span></td><td class="tbl-style hide-narrow">Loose hexameter</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:65%"></div></div><span class="bar-label">Scholarly standard; contested</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1980</td><td class="tbl-avail"></td><td><span class="tbl-name">Walter Shewring</span></td><td class="tbl-style hide-narrow">Faithful prose</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:74%"></div></div><span class="bar-label">Quietly respected</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1996</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Robert Fagles</span></td><td class="tbl-style hide-narrow">Free verse, dramatic</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:82%"></div></div><span class="bar-label">Most widely taught</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2000</td><td class="tbl-avail"></td><td><span class="tbl-name">Stanley Lombardo</span></td><td class="tbl-style hide-narrow">Colloquial free verse</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-thin" style="width:50%"></div></div><span class="bar-label">Limited academic review</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2013</td><td class="tbl-avail"></td><td><span class="tbl-name">Stephen Mitchell</span></td><td class="tbl-style hide-narrow">Verse, colloquial</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-neg" style="width:28%"></div></div><span class="bar-label">Academic scepticism</span></div></td></tr>
+        <tr class="era-row"><td colspan="6">Contemporary</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2016</td><td class="tbl-avail"></td><td><span class="tbl-name">Anthony Verity</span></td><td class="tbl-style hide-narrow">Plain prose, faithful</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:68%"></div></div><span class="bar-label">Reliable; lacks vitality</span></div></td></tr>
+        <tr class="trans-row" data-target="wilson"><td class="tbl-chevron">▸</td><td class="tbl-year">2017</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Emily Wilson</span></td><td class="tbl-style hide-narrow">Iambic pentameter, modern</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:55%"></div></div><span class="bar-label">Landmark; deeply contested</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2018</td><td class="tbl-avail"></td><td><span class="tbl-name">Peter Green</span></td><td class="tbl-style hide-narrow">Six-beat line</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:70%"></div></div><span class="bar-label">Scholarly weight</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2025</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Daniel Mendelsohn</span></td><td class="tbl-style hide-narrow">Six-beat line, archaic</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:80%"></div></div><span class="bar-label">Early strong reception</span></div></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1.2rem;font-family:'Iowan Old Style',Georgia,serif;font-size:.92rem;color:var(--muted);font-style:italic;max-width:780px">
+      The four translators below (Robert Fagles, Robert Fitzgerald, Daniel Mendelsohn, and Emily Wilson) are the ones with full reference texts on hand for line-by-line comparison. Emily Wilson's is the only one this piece argues against.
+    </p>
+  </details>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §01: DID ODYSSEUS EVEN TRY TO SAVE HIS MEN?
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-01">
+    <div class="ch-num">01.</div>
+    <h2 class="ch-title">Did Odysseus even try to save his men?</h2>
+    <p class="ch-sub">Emily Wilson cut the line that says he did, and the line that named the men's own recklessness as the reason they died.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 1.5–9</span>
+      <span class="ref-greek">ἀτασθαλίῃσιν · ἱέμενός περ · νήπιοι</span>
+      <span class="ref-gloss">"Yet not even so could he save his companions, <strong>though he longed to</strong>; for through <strong>their own reckless folly</strong> they perished: <strong>children, fools</strong>." The line tells us Odysseus tried; his men died from a named moral failing.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">in his deep heart at sea, while he fought only</p>
+            <p class="ctx">to save his life, to bring his shipmates home.</p>
+            <p class="hot"><mark class="hl-a">But not by will nor valor could he save them,</mark></p>
+            <p class="hot"><mark class="hl-a">for their own recklessness destroyed them all —</mark></p>
+            <p class="hot"><mark class="hl-a">children and fools, they killed and feasted on</mark></p>
+            <p class="ctx">the cattle of Lord Hēlios, the Sun…</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">many pains he suffered, heartsick on the open sea,</p>
+            <p class="ctx">fighting to save his life and bring his comrades home.</p>
+            <p class="hot"><mark class="hl-a">But he could not save them from disaster, hard as he strove —</mark></p>
+            <p class="hot"><mark class="hl-a">the recklessness of their own ways destroyed them all,</mark></p>
+            <p class="hot"><mark class="hl-a">the blind fools, they devoured the cattle of the Sun…</mark></p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">Many the toils he suffered at sea, anguish in his heart</p>
+            <p class="ctx">As he struggled to safeguard his life and the homecoming of his companions.</p>
+            <p class="hot"><mark class="hl-a">But he did not save his companions even so, though he longed to,</mark></p>
+            <p class="hot"><mark class="hl-a">For their heedlessness destroyed them, theirs and nobody else's —</mark></p>
+            <p class="hot"><mark class="hl-a">Fools that they were, like children, who devoured the sun-god Hyperion's</mark></p>
+            <p class="ctx">Cattle…</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">…the pain he suffered in the storms at sea, and how</p>
+            <p class="ctx">he worked to save his life and bring his men</p>
+            <p class="ctx">back home.</p>
+            <p class="hot"><mark class="hl-w-strong">He failed to keep them safe; poor fools,</mark></p>
+            <p class="hot"><mark class="hl-w">they ate the Sun God's cattle</mark>, and the god</p>
+            <p class="hot"><mark class="hl-w">kept them from home.</mark></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>Where the Greek says <span class="gk">ἀλλ' οὐδ' ὧς</span> ("yet not even so," despite his efforts) Odysseus could not save his men, Emily Wilson leaves out this important qualification. And then, with breathtaking insouciance, she simply <em class="quote">omits to translate the key phrase "though he longed to"</em> (<span class="gk">ἱέμενός περ</span>, Od. 1.6) as well as, in its entirety, <em class="quote">the crucial line: "it was through their own blind recklessness that they perished"</em> (Od. 1.7).</p>
+      <p>Where the Greek says the sun god <em>actively</em> "took away" (<span class="gk">ἀφείλετο</span>, 1.9) their homecoming (i.e. destroyed the men because of their recklessness), Emily Wilson obscures this with her misleading "kept them from home." Without it, Odysseus's failure looks like indifference rather than tragic inadequacy, and the men die for no named reason.</p>
+      <p>Note the alignment between Robert Fitzgerald (1961), Robert Fagles (1996), and Daniel Mendelsohn (2025): three very different stylists all preserving the same two semantic loads (Odysseus's effort + the men's named moral fault) that Emily Wilson alone removes.</p>
+      <span class="src">Richard Whitaker · Acta Classica 2020, p. 246</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §02: ARE THESE WOMEN SLAVES, OR ARISTOCRATS?
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-02">
+    <div class="ch-num">02.</div>
+    <h2 class="ch-title">Are these women slaves, or aristocrats?</h2>
+    <p class="ch-sub">One English word ("slave") for a dozen distinct Greek roles. Applied even to women who were free Phaeacian aristocrats.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 6.18–21</span>
+      <span class="ref-greek">ἀμφίπολοι Χαρίτεσσιν εἰκυῖαι</span>
+      <span class="ref-gloss">"Two amphipoloi like the Graces were sleeping, one on each side of the doorposts." <span class="gk">ἀμφίπολος</span> = female attendant or companion (status unspecified, implicitly free in a royal context). Nausicaa's <span class="gk">ἀμφίπολοι</span> are daughters of free Phaeacian citizens.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">[Robert Fitzgerald compresses the doorway scene; the attendants are referenced at the wash-day procession line 91:]</p>
+            <p class="hot">…off they went in a ground-covering trot,</p>
+            <p class="hot">with princess, <mark class="hl-a">maids</mark>, and laundry drawn behind.</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.4rem">["maids" carries no slave register]</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">She made her way to the gaily painted room</p>
+            <p class="ctx">where a young girl lay asleep…</p>
+            <p class="ctx">Nausicaa, the daughter of generous King Alcinous.</p>
+            <p class="hot"><mark class="hl-a">Two handmaids fair as the Graces slept beside her,</mark></p>
+            <p class="hot"><mark class="hl-a">flanking the two posts, with the gleaming doors closed.</mark></p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">She entered a richly appointed chamber</p>
+            <p class="ctx">where a maiden was fast asleep…</p>
+            <p class="ctx">Nausikáa, the daughter of great-hearted Alkínoös.</p>
+            <p class="hot"><mark class="hl-a">Near her were two attendants whose beauty</mark></p>
+            <p class="hot"><mark class="hl-a">came from the Graces,</mark></p>
+            <p class="hot"><mark class="hl-a">One on each side of the door-posts.</mark></p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="ctx">She went inside the decorated bedroom where</p>
+            <p class="ctx">the young princess, Nausicaa, was sleeping,</p>
+            <p class="ctx">as lovely as a goddess.</p>
+            <p class="hot"><mark class="hl-w-strong">Slaves were sleeping outside her doorway,</mark></p>
+            <p class="hot"><mark class="hl-w">one on either side; two charming girls</mark></p>
+            <p class="hot"><mark class="hl-w">with all the Graces' gifts.</mark></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>Emily Wilson's "Pan-Slaveism" policy (her own description: she wants "to mark the fact that the idealized society depicted in the Odyssey is one where slavery is shockingly taken for granted") leads her to translate <span class="gk">ἀμφίπολος</span> as "slave" <em>even when the women in question are free Phaeacian companions to a royal princess</em>.</p>
+      <p>Richard Whitaker: Emily Wilson is <em class="quote">simply wrong</em> when she uses "slave" (as she often does) to render <span class="gk">θεράπων</span> ("attendant" or "squire") and <span class="gk">κήρυξ</span> ("herald"). But when her wrong-headed interpretation might get her into difficulties, she simply abandons it. At Od. 2.38 the herald Peisenor becomes "the competent official," and the Black African herald Eurybates (19.244) becomes "valet." The category buckles under its own internal contradictions.</p>
+      <span class="src">Corinne Pache · BMCR 2018.10.58 · Richard Whitaker · Acta Classica 2020, p. 248</span>
+    </div>
+
+    <!-- ───── 4 expandable additional passages ───── -->
+    <div class="also-group">
+      <div class="also-group-label">Three more passages where the same word triggers the same problem</div>
+
+      <details class="also">
+        <summary>
+          <span class="also-chev">▸</span>
+          <span class="also-label">The ball scene: a "slave girl" misses the catch</span>
+          <span class="also-ref">Od. 6.122 · <span class="gk">ἔσφηλεν δ' ἐπὶ δίνην</span></span>
+        </summary>
+        <div class="also-body">
+          <div class="ref-strip">
+            <span class="ref-greek">…ἔσφηλεν δ' ἐπὶ δίνην. αἱ δ' ἐπὶ μακρὸν ἄϋσαν…</span>
+            <span class="ref-gloss">"She [the amphipolos] threw it into the eddy. They cried out loudly…" Same girl, same scene, same Greek word.</span>
+          </div>
+          <div class="diff-hero">
+            <div class="diff-grid">
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div></div>
+                <div class="diff-body">
+                  <p class="ctx">…they ran and passed a ball to a rhythmic beat,</p>
+                  <p class="hot">when the king's daughter threw <mark class="hl-a">her ball off line</mark></p>
+                  <p class="hot">and missed, and put it in the whirling stream…</p>
+                </div>
+              </div>
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div></div>
+                <div class="diff-body">
+                  <p class="ctx">…struck up a game of ball.</p>
+                  <p class="hot">The ball — the princess suddenly tossed it to <mark class="hl-a">a maid</mark></p>
+                  <p class="hot">but it missed the girl, it splashed in a deep swirling pool…</p>
+                </div>
+              </div>
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div></div>
+                <div class="diff-body">
+                  <p class="ctx">…by now she had yoked the mules…</p>
+                  <p class="hot">Just then the princess threw the ball to <mark class="hl-a">one of her maids</mark> —</p>
+                  <p class="hot">But it missed the maid and plunged into the eddying depths.</p>
+                </div>
+              </div>
+              <div class="diff-col diff-col-wilson">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div></div>
+                <div class="diff-body">
+                  <p class="ctx">…they ran and passed a ball to a rhythmic beat,</p>
+                  <p class="hot">The princess threw the ball towards <mark class="hl-w-strong">a slave girl</mark>,</p>
+                  <p class="hot">who missed, and it fell in the swirling river.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="aftermath">
+            <p>Same girl, same scene, same Greek word. Three translators reach for the neutral "maid" or sidestep the noun entirely. Emily Wilson alone calls a free-born Phaeacian royal companion a "slave girl."</p>
+            <span class="src">Corinne Pache · BMCR 2018.10.58</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="also">
+        <summary>
+          <span class="also-chev">▸</span>
+          <span class="also-label">"Slaves with braided hair": Nausicaa addresses her friends</span>
+          <span class="also-ref">Od. 6.199 · <span class="gk">ἀμφιπόλοισιν καλλικόμοισιν</span></span>
+        </summary>
+        <div class="also-body">
+          <div class="ref-strip">
+            <span class="ref-greek">αὐτίκα δ' ἀμφιπόλοισιν ἐκέκλετο καλλικόμοισιν</span>
+            <span class="ref-gloss">"Straightaway she called out to her fair-haired amphipoloi." The ornamental, affectionate epithet: these are her companions, not subordinates.</span>
+          </div>
+          <div class="diff-hero">
+            <div class="diff-grid">
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">Turning, she called out to <mark class="hl-a">her maids-in-waiting</mark>:</p>
+                  <p class="hot"><mark class="hl-a">"Stay with me! Does the sight of a man scare you?"</mark></p>
+                </div>
+              </div>
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">She called out to <mark class="hl-a">her girls with lovely braids</mark>:</p>
+                  <p class="hot"><mark class="hl-a">"Stop, my friends! Why run when you see a man?"</mark></p>
+                </div>
+              </div>
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">And now she commanded <mark class="hl-a">her maids, those women with beautiful braids</mark>:</p>
+                  <p class="hot"><mark class="hl-a">"Stay right where you are, girls! One look at a man and you're fleeing?"</mark></p>
+                </div>
+              </div>
+              <div class="diff-col diff-col-wilson">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">And then she called <mark class="hl-w-strong">her slaves with braided hair</mark>.</p>
+                  <p class="hot"><mark class="hl-w">"Wait, girls! Why are you running from this man?"</mark></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="aftermath">
+            <p>The companions Nausicaa calls "my friends" (Robert Fagles), or "girls" warmly (Robert Fitzgerald, Daniel Mendelsohn), are Emily Wilson's "slaves with braided hair." The ornamental Homeric epithet <span class="gk">καλλικόμοισιν</span> (affectionate, formulaic, free of status content) is grafted onto a slave label the Greek does not bear here.</p>
+            <span class="src">Corinne Pache · BMCR 2018.10.58</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="also">
+        <summary>
+          <span class="also-chev">▸</span>
+          <span class="also-label">Canapés: Emily Wilson's most-quoted anachronism, plus a "humble slave" housekeeper</span>
+          <span class="also-ref">Od. 4.55 · <span class="gk">εἴδατα · ταμίη</span></span>
+        </summary>
+        <div class="also-body">
+          <div class="ref-strip">
+            <span class="ref-greek">ταμίη δ' ἐπέθηκεν ἄρ' εἴδατα πολλά</span>
+            <span class="ref-gloss"><span class="gk">ταμίη</span> = housekeeper with authority over storerooms (a position of trust). <span class="gk">εἴδατα</span> = "foods, delicacies" (generic).</span>
+          </div>
+          <div class="diff-hero">
+            <div class="diff-grid">
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">The <mark class="hl-a">grave housekeeper</mark> brought her tray of loaves</p>
+                  <p class="hot">with <mark class="hl-a">many savories</mark> to lavish on them…</p>
+                </div>
+              </div>
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">A <mark class="hl-a">staid housekeeper</mark> brought on bread to serve them,</p>
+                  <p class="hot"><mark class="hl-a">appetizers aplenty</mark> too, lavish with her bounty.</p>
+                </div>
+              </div>
+              <div class="diff-col">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">Then <mark class="hl-a">the housekeeper, worthy woman, brought in the bread</mark> and served it,</p>
+                  <p class="hot">Glad to have <mark class="hl-a">so many dishes</mark> to set out from her storerooms inside.</p>
+                </div>
+              </div>
+              <div class="diff-col diff-col-wilson">
+                <div class="diff-col-head"><div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div></div>
+                <div class="diff-body">
+                  <p class="hot">and <mark class="hl-w-strong">a humble slave girl</mark> brought bread and many <mark class="hl-w-strong">canapés</mark>,</p>
+                  <p class="hot">a lavish spread.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="aftermath">
+            <p><em class="quote">canapés</em> is a French loan-word coined in the 18th century for cocktail-party food. It is class-inflected in a way the Greek <span class="gk">εἴδατα</span> ("foods, delicacies") is not. The compounding error is the housekeeper: <span class="gk">ταμίη</span> denotes administrative authority over the storerooms, so Emily Wilson's <em class="quote">humble slave girl</em> both mislabels her status and adds a deprecating adjective absent from Homer.</p>
+            <span class="src">Corinne Pache · BMCR 2018.10.58 · Richard Whitaker · Acta Classica 2020</span>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- The term table -->
+    <div class="term-table-wrap">
+      <h4>One English word ("slave") for a dozen Greek roles</h4>
+      <table class="term-table">
+        <thead>
+          <tr><th>Greek term</th><th>Standard meaning</th><th>Emily Wilson renders</th><th>The internal contradiction</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="gk">ἀμφίπολος</td>
+            <td>female attendant / companion (status unspecified)</td>
+            <td><mark class="hl-w">slave</mark> / house girl</td>
+            <td>Used of free Phaeacian women in Nausicaa's retinue. See all four passages above.</td>
+          </tr>
+          <tr>
+            <td class="gk">θεράπων</td>
+            <td>attendant, squire ("dependent but free")</td>
+            <td><mark class="hl-w">slave</mark></td>
+            <td>Includes elite warriors and the squires of named heroes; cannot be slaves.</td>
+          </tr>
+          <tr>
+            <td class="gk">κήρυξ</td>
+            <td>herald (elite, ritually protected official)</td>
+            <td><mark class="hl-w">slave</mark> (usually)</td>
+            <td>At Od. 2.38, where the herald handles the sceptre, Emily Wilson silently switches to "the competent official." Eurybates (19.244), a Black African herald, she calls "valet."</td>
+          </tr>
+          <tr>
+            <td class="gk">ταμίη</td>
+            <td>housekeeper (administrative authority over storerooms)</td>
+            <td><mark class="hl-w">slave girl</mark> (often "humble slave girl")</td>
+            <td>The male equivalent <span class="gk">ταμίης</span> (Aeolus, Od. 10.21) she translates "steward of the winds," because Aeolus is a god.</td>
+          </tr>
+          <tr>
+            <td class="gk">ποιμήν</td>
+            <td>shepherd</td>
+            <td><mark class="hl-w">slave</mark> (4.86)</td>
+            <td>The equivalent at 13.222 she calls "shepherd," because that shepherd is Athena in disguise.</td>
+          </tr>
+          <tr>
+            <td class="gk">δμωαί</td>
+            <td>enslaved household women (actual slaves)</td>
+            <td><mark class="hl-w">girls</mark> (passim, esp. Od. 22)</td>
+            <td>The only group Emily Wilson <em>should</em> call slaves she calls "girls." See the execution passage above.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:.9rem;font-family:'Iowan Old Style',Georgia,serif;font-size:.88rem;color:var(--muted);font-weight:300;line-height:1.55">
+        Richard Whitaker, citing William G. Thalmann (2011): Homer "tends to avoid words unambiguously meaning 'slave'," a feature scholars read as Homer's own indirect mitigation of the institution. "Because it obscures this significant feature of the epic, Emily Wilson's translation, ironically, could not be used for research into 'slavery in Homer's Odyssey.'"
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §03: AND WHEN THEY REALLY ARE SLAVES, WHY "GIRLS"?
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-03">
+    <div class="ch-num">03.</div>
+    <h2 class="ch-title">And when they really <em>are</em> slaves, why does she call them "girls"?</h2>
+    <p class="ch-sub">Eight times in forty lines, at the moment of these women's execution, Emily Wilson softens "women" to "girls," a register she doesn't reach for anywhere else in the poem.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 22.421–473</span>
+      <span class="ref-greek">δμωαί</span>
+      <span class="ref-gloss"><span class="gk">δμωαί</span> = "enslaved women of the household." This is the rare place in Homer where the word unambiguously means slaves: the twelve household women who slept with the suitors are forced to clean up the carnage, then hanged. Every other major translator calls them "women." Emily Wilson calls them "girls."</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">The <mark class="hl-a">women</mark>, herded together, came in tears…</p>
+            <p class="hot">there Telemachus, with a deft seaman's hand,</p>
+            <p class="hot">caught them in a noose-line that strung them up by the necks…</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.4rem">[Robert Fitzgerald uses "women" throughout the execution, never "girls"]</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">The <mark class="hl-a">women</mark> crowded in, huddling all together…</p>
+            <p class="hot">so the <mark class="hl-a">women's heads</mark> were trapped in a line,</p>
+            <p class="hot">nooses yanking their necks up, one by one…</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">…they brought the <mark class="hl-a">female slaves</mark> out of the strong-built Hall…</p>
+            <p class="hot">"Let the death that I inflict on these <mark class="hl-a">women</mark> not be a clean one!"</p>
+            <p class="hot">So did the <mark class="hl-a">women</mark> hold their heads all in a row…</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Twelve stepped away from honor: those twelve <mark class="hl-w-strong">girls</mark></p>
+            <p class="hot">"The <mark class="hl-w-strong">girls</mark> must help. Then clean my stately chairs…"</p>
+            <p class="hot">Sobbing desperately the <mark class="hl-w-strong">girls</mark> came, weeping…</p>
+            <p class="hot">just so the <mark class="hl-w-strong">girls</mark>, their heads all in a row,</p>
+            <p class="hot">were strung up with the noose around their necks…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>This is the <strong>inverse</strong> of §02. Where Emily Wilson <em>imposed</em> slave status on free women, here she <em>removes</em> adult status from women who actually are enslaved. <span class="gk">δμωαί</span> (a word that <em>does</em> mean "enslaved women") becomes "girls," even as the same passage also (correctly) uses "fifty female slaves." The inconsistency is internal to Emily Wilson's own translation.</p>
+      <p>Note what doesn't happen elsewhere: Emily Wilson does not call Nausicaa, or Penelope, or Helen "girls." The diminutive arrives only when adult enslaved women are about to be executed, at the precise moment the Greek confronts the reader most directly with what slavery meant. The softening is not a quirk of vocabulary: it is selective, and the selection lands at the worst possible point.</p>
+      <span class="src">Corinne Pache · BMCR 2018.10.58 · Richard Whitaker · Acta Classica 2020, p. 248</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §04: DID WILSON TURN ODYSSEUS INTO A VILLAIN?
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-04">
+    <div class="ch-num">04.</div>
+    <h2 class="ch-title">Why is Emily Wilson casting doubt on our hero? On the very first line..</h2>
+    <p class="ch-sub">The literal opening line of the poem. The very first word about Odysseus, and Emily Wilson renders it <em>"complicated."</em></p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 1.1</span>
+      <span class="ref-greek">πολύτροπος</span>
+      <span class="ref-gloss">"Of many turns / ways": cunning <strong>and</strong> much-travelled simultaneously. The poem's first word about Odysseus. Every translator's calling card.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Sing in me, Muse, and through me tell the story</p>
+            <p class="hot">of that <mark class="hl-a">man skilled in all ways of contending</mark>,</p>
+            <p class="ctx">the wanderer, harried for years on end,</p>
+            <p class="ctx">after he plundered the stronghold</p>
+            <p class="ctx">on the proud height of Troy.</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Sing to me of the man, Muse, the <mark class="hl-a">man of twists and turns</mark></p>
+            <p class="hot">driven time and again off course, once he had plundered</p>
+            <p class="ctx">the hallowed heights of Troy.</p>
+            <p class="ctx">Many cities of men he saw and learned their minds,</p>
+            <p class="ctx">many pains he suffered, heartsick on the open sea…</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Tell me the tale of a man, Muse, who had <mark class="hl-a">so many roundabout ways</mark></p>
+            <p class="hot">To wander, driven off course, after sacking Troy's hallowed keep;</p>
+            <p class="ctx">Many the peoples whose cities he saw and whose ways of thinking he learned,</p>
+            <p class="ctx">Many the toils he suffered at sea, anguish in his heart…</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Tell me about a <mark class="hl-w">complicated man</mark>.</p>
+            <p class="ctx">Muse, tell me how he wandered and was lost</p>
+            <p class="ctx">when he had wrecked the holy town of Troy,</p>
+            <p class="ctx">and where he went, and who he met, the pain</p>
+            <p class="ctx">he suffered in the storms at sea…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p><em class="quote">complicated</em> is a single psychological adjective that forecloses the Greek's deliberate spatial / tactical / moral ambiguity. <span class="gk">πολύτροπος</span> means "of many turns": cunning <em>and</em> much-travelled simultaneously. Corinne Pache (whose overall verdict on Emily Wilson is positive) singles out this opening as the moment the translation becomes "sturdier than the original: a bit less open-ended, less polytropic, less complicated."</p>
+      <span class="src">Corinne Pache · BMCR 2018.10.58 · Richard Whitaker · Acta Classica 2020, pp. 245–47</span>
+    </div>
+
+    <!-- The receipts: 5 numbered items -->
+    <p style="font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--slate);font-weight:600;margin-top:3rem;margin-bottom:.3rem">The wider pattern: five more receipts</p>
+    <ol class="receipts-list">
+      <li>From the stock epithet <span class="gk">πολύμητις</span> ("resourceful," "of many wiles"), at Od. 9.1 Emily Wilson extracts <em class="quote">"Wily Odysseus, the lord of lies"</em>; and at 24.303, <em class="quote">"lying Odysseus."</em> Richard Whitaker: "she warns the reader against believing anything that may follow."</li>
+      <li>From <span class="gk">πολύτλας</span> ("much-enduring") she derives <em class="quote">"hardened"</em> (23.110) and <em class="quote">"ruthless"</em> (24.349).</li>
+      <li>The suitors' <span class="gk">ὑπέρβιον ὕβριν</span> ("violent insolence," per Anthony Verity; "outrageous and arrogant," per Peter Green) becomes Emily Wilson's mild <em class="quote">"ungentlemanly suitors"</em> (16.410). Her summary calls them men who simply <em class="quote">"behaved badly"</em> (p. 551) where the Greek talks of men who "perpetrated a monstrous wrong."</li>
+      <li>The Cyclops is described in Od. 9.214–15 as "a savage with no understanding of either justice or laws" (Anthony Verity). Emily Wilson translates: <em class="quote">"a man of courage, wild, and lacking knowledge of the normal customs."</em> She eschews "savage" because the word carries "a legacy of colonialism … anachronistic in the world of The Odyssey" (Emily Wilson, p. 88).</li>
+      <li>Odysseus's stock action verbs are uniformly hardened: <span class="gk">ὀλέσας</span> (universally translated "having lost [all his companions]") becomes in Emily Wilson <em class="quote">"having caused the death of all your men"</em> (9.534), <em class="quote">"having destroyed your men"</em> (11.117), <em class="quote">"let his loyal men be killed"</em> (19.272). Richard Whitaker: "But why, one has to ask, would Odysseus, who is the narrator in all three places, inculpate himself in this way?"</li>
+    </ol>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §05: BRONZE-AGE EPIC, OR NETFLIX SHOW?
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-05">
+    <div class="ch-num">05.</div>
+    <h2 class="ch-title">Bronze-Age epic, or Netflix show?</h2>
+    <p class="ch-sub">"Babysit." "Tote bag." "Cushy." "Snuggling." "Whooshed." Welcome to Ithaca. And three lines later, "vernal Dawn."</p>
+
+    <p style="font-family:'Iowan Old Style',Georgia,serif;font-size:1.05rem;line-height:1.65;color:var(--muted);font-weight:300;max-width:820px;margin-bottom:.8rem">
+      Richard Whitaker accepts that Emily Wilson sometimes uses higher-register diction effectively. The problem is the <em>simultaneous</em> deployment of colloquialism and elevated archaism within the same text, what he calls "two levels collid[ing] jarringly." It is not that "tote bag" is a bad word. It is that "tote bag" sits four chapters away from "vernal Dawn," and the reader is never sure which Ithaca they are reading about.
+    </p>
+
+    <div class="word-lists">
+      <div class="word-block contemporary">
+        <h4>Emily Wilson, contemporary register</h4>
+        <div class="word-cloud">
+          <span class="w">"You must be joking" <span class="ref">1.64</span></span>
+          <span class="w">babysit <span class="ref">7.12</span></span>
+          <span class="w">whooshed <span class="ref">10.55</span></span>
+          <span class="w">snuggling <span class="ref">10.218</span></span>
+          <span class="w">cutest <span class="ref">10.278</span></span>
+          <span class="w">Teenagers <span class="ref">11.38</span></span>
+          <span class="w">she glugs it down <span class="ref">12.106</span></span>
+          <span class="w">tote bag <span class="ref">13.438</span></span>
+          <span class="w">cushy <span class="ref">14.47</span></span>
+          <span class="w">make nice <span class="ref">14.387</span></span>
+          <span class="w">standoffishness <span class="ref">15.72</span></span>
+          <span class="w">games of darts <span class="ref">17.168</span></span>
+          <span class="w">cottoned on <span class="ref">18.95</span></span>
+          <span class="w">pace themselves <span class="ref">21.295</span></span>
+          <span class="w">fluffy pillows <span class="ref">24.257</span></span>
+        </div>
+      </div>
+      <div class="word-block elevated">
+        <h4>Emily Wilson, elevated register (same translation)</h4>
+        <div class="word-cloud">
+          <span class="w">vernal Dawn <span class="ref">5.228</span></span>
+          <span class="w">seven days and ten <span class="ref">5.277</span></span>
+          <span class="w">fleet-foot deer <span class="ref">6.104</span></span>
+          <span class="w">wreathed about by boundless sea <span class="ref">10.195</span></span>
+          <span class="w">with dangers compassed round <span class="ref">17.526</span></span>
+          <span class="w">"Mentor, for shame!" <span class="ref">2.242</span></span>
+        </div>
+      </div>
+    </div>
+    <p class="word-block-footnote" style="font-family:'Iowan Old Style',Georgia,serif;font-size:.92rem;line-height:1.6;color:var(--muted);font-weight:300;margin-top:1.6rem;max-width:880px">
+      Richard Whitaker calls out one line where the two levels collide directly: <em class="quote">"mighty Zeus, the god of home owners"</em> (22.335). He also demonstrates that one of Emily Wilson's "lines" of verse is in fact a verbatim sentence from E.V. Rieu's (1946) prose translation, broken into pentameters. "Emily Wilson's vocabulary and style (for the most part plain and flat, often prosaic) remind me of nothing so much as E.V. Rieu's relentlessly 1940s-contemporary, ordinary-language prose translation."
+    </p>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       CLOSER: THE RECEIPTS (errata)
+       ══════════════════════════════════════════════════════════════════ -->
+  <div class="closer reveal" id="receipts">
+    <div class="closer-label">The receipts</div>
+    <h2>Twelve specific errors, set out</h2>
+    <p class="lede">
+      "Any translator of a text as long and complex as the Odyssey is going to err. But in addition to the usual typos, Emily Wilson makes so many mistakes that, collectively, they begin to sap the reader's confidence in her translation." Richard Whitaker compiled an eight-page corrigenda sent to Norton. Selected items below.
+    </p>
+
+    <details class="errata">
+      <summary>Open the corrigenda: 12 errors of fact and translation</summary>
+      <table class="errata-table">
+        <thead><tr><th>Ref.</th><th>Emily Wilson reads</th><th>Should be</th></tr></thead>
+        <tbody>
+          <tr><td>3.7</td><td>fifty (cattle)</td><td><mark class="hl-a">five hundred</mark> (<span class="gk">πεντηκόσιοι</span>)</td></tr>
+          <tr><td>10.513 · 24.11</td><td>spacious / open (Hades)</td><td><mark class="hl-a">dank / mouldy</mark> (<span class="gk">εὐρώεντα</span>, from "mould," not "wide")</td></tr>
+          <tr><td>16.441 · 20.306</td><td>sword</td><td><mark class="hl-a">spear</mark></td></tr>
+          <tr><td>17.254</td><td>tomorrow</td><td><mark class="hl-a">today</mark></td></tr>
+          <tr><td>19.79</td><td>slave girls</td><td><mark class="hl-a">male slaves</mark> (<span class="gk">δμῶες μυρίοι</span>)</td></tr>
+          <tr><td>19.339</td><td>cloudy</td><td><mark class="hl-a">snowy</mark> (<span class="gk">νιφόεντα</span>, from <span class="gk">νιφάς</span>, not <span class="gk">νέφος</span>)</td></tr>
+          <tr><td>19.414 · 21.220</td><td>Odysseus's cousins</td><td><mark class="hl-a">Odysseus's uncles</mark> (the sons of Autolycus)</td></tr>
+          <tr><td>16.434–47</td><td>speech attributed to Antinous</td><td><mark class="hl-a">attributed to Eurymachus</mark> in Greek</td></tr>
+          <tr><td>p. 562 · p. 558</td><td>"Eteoneus" and "Boethoedes" treated as two persons</td><td><mark class="hl-a">one character</mark>: Eteoneus son of Boethoös</td></tr>
+          <tr><td>24.104</td><td>"Menelaus"</td><td><mark class="hl-a">Melaneus</mark></td></tr>
+          <tr><td>p. 8 (first ed.)</td><td>Richard Bentley's date for Homer as "about 10,000 BCE"</td><td><mark class="hl-a">1,000 BCE</mark> (silently corrected in later printings)</td></tr>
+          <tr><td>p. 573</td><td>island Samē "in the eastern Aegean"</td><td><mark class="hl-a">Ionian Sea, off western Greece</mark> (later Cephallonia)</td></tr>
+          <tr><td colspan="3"><strong>Silently untranslated lines:</strong> <mark class="hl-a">Od. 1.7 · 7.127–28 · 15.241 · 16.343–44 · 22.388</mark>. These include the line that anticipates the suitors' destruction in Penelope's dream (19.539–40) and the closing image of the suitors' deaths ("The sun shines down and takes their life away," quoted in Emily Wilson's own introduction but omitted from her translation).</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td class="src-foot" colspan="3">Richard Whitaker, Acta Classica 2020, pp. 252–53 (footnotes 31–36)</td></tr>
+        </tfoot>
+      </table>
+    </details>
+  </div>
+
+  </div><!-- /.main-col -->
+</main>
+
+<footer>
+  Source paper: <a href="https://www.academia.edu/97598353/HOMERS_ODYSSEY_THREE_WAYS_RECENT_TRANSLATIONS" target="_blank" rel="noopener">Richard Whitaker, "Homer's Odyssey Three Ways" · Acta Classica LXIII (2020)</a>
+  &nbsp;·&nbsp; Corinne Pache, BMCR 2018.10.58 &nbsp;·&nbsp; A.E. Stallings, TLS &nbsp;·&nbsp; the full long-form survey is at <a href="odyssey_translations.html">odyssey_translations.html</a>.
+</footer>
+
+<script>
+(function () {
+  // Subtle fade-in on scroll
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Sidebar scrollspy: track which section the reader is on, highlight in purple
+  var sections = document.querySelectorAll('section.chapter, .closer');
+  var navLinks = document.querySelectorAll('.sidenav a');
+  if (!sections.length || !navLinks.length) return;
+
+  var linkMap = {};
+  navLinks.forEach(function (a) {
+    var href = a.getAttribute('href');
+    if (href && href.charAt(0) === '#') linkMap[href.slice(1)] = a;
+  });
+
+  function setActive(id) {
+    navLinks.forEach(function (a) { a.classList.remove('active'); });
+    if (linkMap[id]) linkMap[id].classList.add('active');
+  }
+
+  if ('IntersectionObserver' in window) {
+    var visible = {};
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible[e.target.id] = e.intersectionRatio;
+        else delete visible[e.target.id];
+      });
+      // pick the section with the highest intersection ratio still visible;
+      // if none, fall back to the topmost section above the viewport
+      var best = null, bestRatio = 0;
+      for (var id in visible) {
+        if (visible[id] > bestRatio) { bestRatio = visible[id]; best = id; }
+      }
+      if (!best) {
+        // find the last section whose top is above the spy line
+        var pivot = window.innerHeight * 0.35;
+        var lastAbove = null;
+        sections.forEach(function (s) {
+          if (s.getBoundingClientRect().top < pivot) lastAbove = s.id;
+        });
+        best = lastAbove;
+      }
+      if (best) setActive(best);
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.2, 0.5, 1] });
+    sections.forEach(function (s) { if (s.id) spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

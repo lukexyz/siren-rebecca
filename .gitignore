@@ -1,0 +1,25 @@
+# Reference texts (epub/pdf — copyright)
+ref/
+docs/
+
+# Claude Code local settings
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+
+# Node / build
+node_modules/
+dist/
+build/
