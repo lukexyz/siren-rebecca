@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Complicated Man: The Case for Emily Wilson's Odyssey</title>
+  <style>
+    :root {
+      --ink:        #14142b;
+      --ink-2:      #1f1f3d;
+      --ink-soft:   #2a2a4a;
+      --paper:      #faf7ef;
+      --paper-2:    #f4efe1;
+      --paper-3:    #efe9d4;
+      --gold:       #c9a84c;
+      --gold-2:     #b8932f;
+      --gold-dim:   #e8d9a8;
+      --rust:       #8b3a2a;
+      --rust-soft:  #b85a48;
+      --wine:       #6b1c2f;
+      --slate:      #4a5568;
+      --slate-soft: #6b7280;
+      --muted:      #5a5a5a;
+      --divider:    #ddd5c0;
+      --divider-2:  #ebe5cf;
+      --card-bg:    #ffffff;
+      --pos:        #2d8659;
+      --pos-soft:   #3aaa74;
+      --pos-dim:    #a8d8bf;
+      --neg:        #b04a3a;
+      --mid:        #d99020;
+      --hist:       #8a7958;
+      --hl-yellow:  rgba(255, 224, 0, 0.55);
+      --hl-yellow-2:rgba(255, 224, 0, 0.82);
+      --hl-green:   rgba(120, 200, 120, 0.45);
+      --hl-green-2: rgba(120, 200, 120, 0.65);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, 'Times New Roman', serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .sans { font-family: 'Inter', 'Helvetica Neue', system-ui, -apple-system, sans-serif; }
+
+    /* ── CROSS-LINK STRIP ── */
+    .crosslink-strip {
+      background: var(--ink-2);
+      border-bottom: 1px solid rgba(201,168,76,.2);
+      padding: .55rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.4rem;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: .74rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .crosslink-strip a {
+      color: rgba(232,217,168,.65);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .crosslink-strip a:hover { color: var(--gold); }
+    .crosslink-strip .cl-sep { color: rgba(255,255,255,.18); }
+    .crosslink-strip .current {
+      color: var(--pos-dim);
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    /* ── HERO ── */
+    header.hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse at 18% 10%, rgba(201,168,76,.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 88% 110%, rgba(45,134,89,.28) 0%, transparent 55%),
+        linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+      color: var(--paper);
+      padding: 5.5rem 2rem 4.5rem;
+      text-align: center;
+      border-bottom: 3px solid var(--pos);
+      overflow: hidden;
+    }
+    header.hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.012) 0 2px, transparent 2px 6px);
+      pointer-events: none;
+    }
+    header.hero .greek {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: 1.05rem;
+      letter-spacing: .22em;
+      color: var(--gold);
+      margin-bottom: .85rem;
+      text-transform: uppercase;
+    }
+    header.hero h1 {
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, serif;
+      font-size: clamp(2.6rem, 8vw, 5.4rem);
+      font-weight: 500;
+      letter-spacing: -.01em;
+      line-height: 1.0;
+      margin: 0 auto .9rem;
+      max-width: 1000px;
+    }
+    header.hero h1 .accent { color: var(--pos-soft); font-style: italic; }
+    header.hero .dek {
+      font-style: italic;
+      color: rgba(232,217,168,.88);
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+    header.hero .hero-meta {
+      margin-top: 1.8rem;
+      font-size: .72rem;
+      color: rgba(255,255,255,.5);
+      letter-spacing: .14em;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      text-transform: uppercase;
+    }
+    header.hero .hero-meta a { color: var(--pos-dim); text-decoration: none; border-bottom: 1px solid rgba(168,216,191,.3); }
+    header.hero .hero-meta a:hover { border-bottom-color: var(--pos-dim); }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 1180px) {
+      main {
+        max-width: 1420px;
+        grid-template-columns: 200px 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+    }
+    .main-col { min-width: 0; }
+
+    /* ── SIDEBAR NAV ── */
+    .sidenav {
+      display: none;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: .82rem;
+    }
+    @media (min-width: 1180px) {
+      .sidenav {
+        display: block;
+        position: sticky;
+        top: 1.6rem;
+        align-self: start;
+        padding: 1.1rem 0 1.2rem;
+        background:
+          linear-gradient(180deg, rgba(45,134,89,.05) 0%, transparent 35%),
+          var(--paper);
+        border: 1px solid var(--divider);
+        border-radius: 10px;
+        box-shadow: 0 1px 0 rgba(20,20,43,.03), 0 6px 18px rgba(20,20,43,.04);
+      }
+    }
+    .sidenav-label {
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--pos);
+      font-weight: 800;
+      padding: 0 1.2rem .6rem;
+      margin-bottom: .35rem;
+      border-bottom: 1px dashed rgba(45,134,89,.22);
+    }
+    .sidenav ul { list-style: none; padding: 0 .55rem; margin: 0; }
+    .sidenav li { margin: .12rem 0; }
+    .sidenav a {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .5rem .8rem;
+      color: var(--slate);
+      text-decoration: none;
+      border-radius: 7px;
+      font-weight: 500;
+      letter-spacing: .005em;
+      line-height: 1.25;
+      transition: color .18s ease, background .18s ease, transform .18s ease;
+      position: relative;
+    }
+    .sidenav a:hover {
+      color: var(--ink);
+      background: rgba(45,134,89,.08);
+      transform: translateX(2px);
+    }
+    .sn-dot {
+      width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+      box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px currentColor;
+      background: currentColor;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .sn-num {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-style: italic; font-size: .82rem; color: var(--slate-soft);
+      width: 18px; flex-shrink: 0; font-weight: 400;
+    }
+    .sn-label { flex: 1; }
+    .sidenav li.sn-c00 { color: var(--gold-2); }
+    .sidenav li.sn-c01 { color: #2d8659; }
+    .sidenav li.sn-c02 { color: #1e6e48; }
+    .sidenav li.sn-c03 { color: #1a6b5e; }
+    .sidenav li.sn-c04 { color: #1a5e7a; }
+    .sidenav li.sn-c05 { color: #154a35; }
+    .sidenav li.sn-c06 { color: #3a5a1a; }
+    .sidenav li.sn-cH  { color: var(--ink); }
+    .sidenav a.active {
+      background: linear-gradient(90deg, rgba(45,134,89,.18), rgba(45,134,89,.04));
+      color: #1a5e38;
+      font-weight: 700;
+      box-shadow: inset 3px 0 0 var(--pos);
+    }
+    .sidenav a.active .sn-dot {
+      background: var(--pos);
+      box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--pos), 0 0 0 7px rgba(45,134,89,.18);
+      transform: scale(1.05);
+    }
+    .sidenav a.active .sn-num { color: var(--pos); font-weight: 600; }
+    @media (prefers-reduced-motion: reduce) {
+      .sidenav a, .sn-dot { transition: none; }
+      .sidenav a:hover { transform: none; }
+    }
+
+    /* ── OVERVIEW CHAPTER ── */
+    .chapter.ch-overview { margin-top: 1rem; margin-bottom: 3.5rem; }
+    .chapter.ch-overview .ch-num { color: var(--gold-2); }
+    .chapter.ch-overview .translations-table { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+
+    /* ── OVERVIEW TABLE (collapsible) ── */
+    details.translations-table {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--divider);
+      padding-bottom: 2rem;
+    }
+    details.translations-table > summary {
+      list-style: none; cursor: pointer;
+      padding: .3rem 0 1rem;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--slate); font-weight: 600;
+      border-bottom: 1px solid var(--divider); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: .5rem; transition: color .15s;
+    }
+    details.translations-table > summary:hover { color: var(--ink); }
+    details.translations-table > summary::-webkit-details-marker { display: none; }
+    details.translations-table > summary::before {
+      content: '▸'; font-size: .85rem; color: var(--gold-2);
+      transition: transform .2s; display: inline-block;
+    }
+    details.translations-table[open] > summary::before { transform: rotate(90deg); }
+
+    .overview-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+    .overview-table thead th {
+      text-align: left; padding: .65rem .85rem;
+      font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--slate); font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-weight: 600; border-bottom: 2px solid var(--ink); background: var(--paper-2);
+    }
+    .overview-table thead th.center { text-align: center; }
+    .trans-row {
+      cursor: pointer; border-bottom: 1px solid var(--divider);
+      transition: background .15s; user-select: none;
+    }
+    .trans-row:hover { background: rgba(45,134,89,.06); }
+    .trans-row.expanded { background: rgba(20,20,43,.04); }
+    .trans-row td { padding: .65rem .85rem; vertical-align: middle; }
+    .trans-row[data-target="wilson"] .tbl-name { background: rgba(45,134,89,.10); border-radius: 14px; padding: 2px 10px; display: inline-block; }
+    .tbl-chevron { width: 22px; text-align: center; color: var(--slate-soft); font-size: .7rem; transition: transform .2s; font-family: 'Inter', sans-serif; }
+    .trans-row.expanded .tbl-chevron { transform: rotate(90deg); color: var(--gold-2); }
+    .tbl-year { color: var(--slate); font-size: .82rem; white-space: nowrap; font-family: 'Inter', sans-serif; font-weight: 500; }
+    .tbl-name { font-weight: 600; font-size: .98rem; color: var(--ink); }
+    .tbl-pub { font-size: .78rem; color: var(--slate); font-family: 'Inter', sans-serif; }
+    .tbl-style { font-size: .78rem; font-style: italic; color: #555; }
+    .tbl-avail { width: 30px; text-align: center; padding: .65rem .3rem !important; }
+    .avail-icon { font-size: .95rem; cursor: default; line-height: 1; }
+    .avail-icon.has { color: var(--pos); }
+    .bar-wrap { display: flex; align-items: center; gap: .55rem; }
+    .bar { height: 8px; border-radius: 4px; background: var(--divider-2); overflow: hidden; width: 120px; flex-shrink: 0; box-shadow: inset 0 1px 1px rgba(0,0,0,.06); }
+    .bar-fill { height: 100%; border-radius: 4px; }
+    .bar-label { font-size: .7rem; color: var(--slate); font-family: 'Inter', 'Helvetica Neue', sans-serif; white-space: nowrap; }
+    .bar-pos  { background: linear-gradient(90deg, var(--pos), #6cb98e); }
+    .bar-mid  { background: linear-gradient(90deg, var(--mid), #f0c460); }
+    .bar-neg  { background: linear-gradient(90deg, var(--neg), #d98a7a); }
+    .bar-hist { background: linear-gradient(90deg, #8a7958, #c2b394); }
+    .bar-thin { background: linear-gradient(90deg, var(--mid), #c8a030); }
+    .tbl-reviews { font-size: .75rem; color: var(--slate); font-family: 'Inter', 'Helvetica Neue', sans-serif; text-align: center; font-weight: 600; }
+    .era-row td {
+      background: var(--ink); color: var(--gold-dim);
+      font-size: .65rem; letter-spacing: .16em; text-transform: uppercase;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif; padding: .35rem .85rem; font-weight: 600;
+    }
+    .details-row { display: none; }
+    .details-row.open { display: table-row; }
+    .details-row > td {
+      padding: 0 !important;
+      background: linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 100%);
+      border-bottom: 2px solid var(--ink);
+    }
+    .details-content { padding: 1.4rem 1.4rem 1.8rem; border-top: 1px solid var(--gold); }
+    .trans-mini { font-family: 'Inter', sans-serif; font-size: .85rem; color: var(--slate); line-height: 1.55; }
+    .trans-mini strong { color: var(--ink); font-weight: 600; }
+
+    /* ── CHAPTER ── */
+    .chapter { margin: 5.5rem 0 4rem; scroll-margin-top: 1.8rem; }
+    .closer { scroll-margin-top: 1.8rem; }
+    .chapter:first-of-type { margin-top: 3rem; }
+
+    .ch-num {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-style: italic; font-weight: 400;
+      color: var(--pos);
+      line-height: 1; margin-bottom: .4rem; letter-spacing: -.02em;
+    }
+    .ch-title {
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, serif;
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      font-weight: 600; line-height: 1.06; letter-spacing: -.01em;
+      color: var(--ink); max-width: 900px; margin-bottom: .9rem;
+    }
+    .ch-sub {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      font-style: italic; font-weight: 300;
+      color: var(--muted); max-width: 760px; line-height: 1.45; margin-bottom: 2.4rem;
+    }
+
+    /* ── REFERENCE STRIP ── */
+    .ref-strip {
+      display: flex; align-items: baseline; flex-wrap: wrap;
+      gap: .8rem 1.2rem; margin-bottom: .9rem; padding-bottom: .8rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    .ref-strip .ref-loc {
+      font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--pos); white-space: nowrap;
+    }
+    .ref-strip .ref-greek {
+      font-family: 'Iowan Old Style', Georgia, serif; font-style: italic; font-size: 1rem; color: #333;
+    }
+    .ref-strip .ref-gloss {
+      font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--slate);
+      flex-basis: 100%; line-height: 1.55;
+    }
+    .ref-strip .ref-gloss strong { color: var(--ink); font-weight: 600; }
+    .ref-strip .gk { font-family: 'Iowan Old Style', Georgia, serif; font-style: italic; }
+
+    /* ── DIFF GRID ── */
+    .diff-hero {
+      background: var(--card-bg);
+      border: 1px solid var(--divider);
+      border-radius: 6px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(20,20,43,.05);
+      margin-bottom: 1.6rem;
+    }
+    .diff-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .diff-col { border-right: 1px solid var(--divider); display: flex; flex-direction: column; }
+    .diff-col:last-child { border-right: none; }
+
+    /* Wilson column: green tint (inverted from murder page) */
+    .diff-col-wilson { background: rgba(45,134,89,.03); }
+    .diff-col-head {
+      background: var(--paper-2); border-bottom: 1px solid var(--divider);
+      padding: .85rem 1rem .8rem; display: flex; flex-direction: column; gap: .35rem;
+    }
+    .diff-col-wilson .diff-col-head { background: rgba(45,134,89,.09); }
+
+    .diff-author-row { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+    .diff-author {
+      font-family: 'Inter', sans-serif; font-size: .76rem; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--ink); font-weight: 700;
+    }
+    /* Wilson name badge: green (inverted from murder page's rust) */
+    .diff-author.is-wilson {
+      background: rgba(45,134,89,.15);
+      color: var(--pos);
+      padding: 3px 10px; border-radius: 10px;
+      border: 1px solid rgba(45,134,89,.28);
+    }
+    .diff-year {
+      font-family: 'Inter', sans-serif; font-size: .68rem; color: var(--gold-2); font-weight: 600;
+    }
+
+    /* Mini consensus bar */
+    .consensus {
+      display: flex; align-items: center; gap: .45rem; cursor: help; position: relative;
+    }
+    .consensus-bar {
+      width: 56px; height: 5px; background: var(--divider-2); border-radius: 3px;
+      overflow: hidden; box-shadow: inset 0 1px 1px rgba(0,0,0,.07);
+    }
+    .consensus-fill { height: 100%; border-radius: 3px; }
+    .consensus-fill.c-pos { background: linear-gradient(90deg, var(--pos), #6cb98e); }
+    .consensus-fill.c-mid { background: linear-gradient(90deg, var(--mid), #f0c460); }
+    .consensus-fill.c-neg { background: linear-gradient(90deg, var(--neg), #d98a7a); }
+    .consensus-label {
+      font-family: 'Inter', sans-serif; font-size: .64rem; letter-spacing: .02em;
+      color: var(--slate); font-style: italic; white-space: nowrap;
+    }
+    .consensus::after {
+      content: attr(data-tip);
+      position: absolute; bottom: calc(100% + 8px); right: 0;
+      background: var(--ink); color: var(--gold-dim); padding: .45rem .7rem;
+      border-radius: 4px; font-family: 'Inter', sans-serif; font-size: .72rem;
+      font-style: normal; letter-spacing: .01em; white-space: nowrap;
+      pointer-events: none; opacity: 0; transform: translateY(4px);
+      transition: opacity .15s, transform .15s;
+      box-shadow: 0 4px 14px rgba(20,20,43,.2); z-index: 10;
+    }
+    .consensus::before {
+      content: ''; position: absolute; bottom: calc(100% + 3px); right: 14px;
+      border: 5px solid transparent; border-top-color: var(--ink);
+      pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 10;
+    }
+    .consensus:hover::after, .consensus:hover::before { opacity: 1; transform: translateY(0); }
+
+    .diff-body {
+      padding: 1rem 1.1rem 1.15rem; font-size: .93rem; line-height: 1.65;
+      color: #222; flex: 1;
+      font-family: 'Iowan Old Style', 'Hoefler Text', Georgia, serif;
+    }
+    .diff-body p { margin-bottom: .4rem; }
+    .diff-body p.ctx { color: #888; font-size: .85rem; line-height: 1.55; }
+    .diff-body p.hot { color: #1a1a1a; padding: .12rem 0; }
+
+    /* highlight marks — green = Wilson wins; yellow = what others lose */
+    mark.hl-w {
+      background: linear-gradient(180deg, transparent 0%, transparent 18%, var(--hl-yellow) 18%, var(--hl-yellow) 90%, transparent 90%);
+      color: inherit; padding: 0 2px; border-radius: 1px; font-weight: 500;
+    }
+    mark.hl-a {
+      background: linear-gradient(180deg, transparent 0%, transparent 18%, var(--hl-green) 18%, var(--hl-green) 90%, transparent 90%);
+      color: inherit; padding: 0 2px; border-radius: 1px;
+    }
+    mark.hl-a-strong {
+      background: var(--hl-green-2); padding: 0 3px; color: inherit; font-weight: 600; border-radius: 1px;
+    }
+    .gk { font-family: 'Iowan Old Style', Georgia, serif; font-style: italic; }
+
+    @media (max-width: 1024px) {
+      .diff-grid { grid-template-columns: repeat(2, 1fr); }
+      .diff-col:nth-child(2) { border-right: none; }
+      .diff-col:nth-child(1), .diff-col:nth-child(2) { border-bottom: 1px solid var(--divider); }
+    }
+    @media (max-width: 580px) {
+      .diff-grid { grid-template-columns: 1fr; }
+      .diff-col { border-right: none; border-bottom: 1px solid var(--divider); }
+      .diff-col:last-child { border-bottom: none; }
+    }
+
+    /* ── AFTERMATH (reviewer quotes, demoted) — green left border ── */
+    .aftermath {
+      max-width: 820px; margin: 1.4rem 0 0;
+      padding: 0 0 0 1.2rem;
+      border-left: 2px solid var(--pos);
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-weight: 300; font-size: .93rem; line-height: 1.65; color: var(--muted);
+    }
+    .aftermath p { margin-bottom: .55rem; font-weight: 300; }
+    .aftermath p strong { color: #2a2a2a; font-weight: 500; }
+    .aftermath em.quote {
+      font-style: italic; color: #404040;
+      background: rgba(120,200,120,.18); padding: 0 4px; border-radius: 2px;
+    }
+    .aftermath .src {
+      display: block; margin-top: .7rem;
+      font-family: 'Inter', sans-serif; font-size: .7rem;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--slate-soft);
+      font-style: normal; font-weight: 500;
+    }
+
+    /* ── DISCLOSURE (also pattern) ── */
+    .also-group { margin-top: 2.2rem; border-top: 1px solid var(--divider); padding-top: 1.4rem; }
+    .also-group-label {
+      font-family: 'Inter', sans-serif; font-size: .68rem; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--slate); font-weight: 600; margin-bottom: .8rem;
+    }
+    details.also { border-bottom: 1px solid var(--divider-2); transition: background .15s; }
+    details.also:last-of-type { border-bottom: none; }
+    details.also > summary {
+      list-style: none; cursor: pointer; padding: .9rem .2rem;
+      display: flex; align-items: baseline; gap: .8rem; transition: padding-left .15s;
+    }
+    details.also > summary::-webkit-details-marker { display: none; }
+    details.also > summary:hover { padding-left: .4rem; }
+    .also-chev { color: var(--gold-2); font-size: .85rem; transition: transform .2s; display: inline-block; flex-shrink: 0; width: 14px; }
+    details.also[open] .also-chev { transform: rotate(90deg); }
+    .also-label { font-family: 'Iowan Old Style', Georgia, serif; font-size: 1.1rem; font-weight: 500; color: var(--ink); flex: 1; }
+    .also-ref { font-family: 'Inter', sans-serif; font-size: .72rem; letter-spacing: .06em; color: var(--slate); white-space: nowrap; }
+    .also-ref .gk { font-style: italic; font-family: 'Iowan Old Style', Georgia, serif; }
+    .also-body { padding: .4rem 0 1.6rem; }
+
+    /* ── EPITHET RANGE TABLE (§02) ── */
+    .epithet-table-wrap {
+      margin-top: 2.4rem;
+      background: var(--card-bg); border: 1px solid var(--divider);
+      border-top: 3px solid var(--pos);
+      border-radius: 4px; padding: 1.2rem 1.4rem 1.4rem;
+    }
+    .epithet-table-wrap h4 {
+      font-family: 'Inter', sans-serif; font-size: .72rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--slate); font-weight: 700; margin-bottom: .8rem;
+    }
+    table.epithet-table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+    table.epithet-table th {
+      text-align: left; padding: .55rem .7rem; background: var(--paper-2);
+      border-bottom: 2px solid var(--ink); font-family: 'Inter', sans-serif;
+      font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--slate); font-weight: 600;
+    }
+    table.epithet-table td {
+      padding: .55rem .7rem; border-bottom: 1px solid var(--divider); vertical-align: top; line-height: 1.5;
+    }
+    table.epithet-table td.gk { font-family: 'Iowan Old Style', Georgia, serif; font-style: italic; font-size: .98rem; }
+    table.epithet-table td.wilson { color: var(--pos); font-style: italic; font-weight: 500; }
+    table.epithet-table tr:last-child td { border-bottom: none; }
+
+    /* ── LINE COUNT STAT BLOCK (§03) ── */
+    .line-count-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 1rem; margin-top: 2.4rem;
+    }
+    @media (max-width: 880px) { .line-count-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .line-count-grid { grid-template-columns: 1fr; } }
+    .line-count-card {
+      background: var(--card-bg); border: 1px solid var(--divider);
+      border-radius: 4px; padding: 1rem 1.1rem 1.2rem; text-align: center;
+    }
+    .line-count-card.is-wilson {
+      border-color: var(--pos); border-top: 3px solid var(--pos);
+    }
+    .line-count-card .lc-name {
+      font-family: 'Inter', sans-serif; font-size: .7rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--slate);
+      margin-bottom: .4rem;
+    }
+    .line-count-card.is-wilson .lc-name { color: var(--pos); }
+    .line-count-card .lc-num {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: 2rem; font-weight: 400; color: var(--ink); line-height: 1.1;
+    }
+    .line-count-card.is-wilson .lc-num { color: var(--pos); font-weight: 600; }
+    .line-count-card .lc-label {
+      font-family: 'Inter', sans-serif; font-size: .72rem; color: var(--slate-soft);
+      margin-top: .35rem; font-style: italic;
+    }
+    .line-count-card.is-wilson .lc-label { color: var(--pos); font-weight: 600; font-style: normal; }
+
+    /* ── ENDORSEMENTS GRID (closer) ── */
+    .endorsements {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.4rem; margin-top: 1.6rem; margin-bottom: 2rem;
+    }
+    @media (max-width: 720px) { .endorsements { grid-template-columns: 1fr; } }
+    .endorse-card {
+      background: var(--card-bg); border: 1px solid var(--divider);
+      border-left: 3px solid var(--pos);
+      border-radius: 0 4px 4px 0; padding: 1.1rem 1.3rem 1.3rem;
+    }
+    .endorse-quote {
+      font-family: 'Iowan Old Style', Georgia, serif; font-size: .97rem;
+      font-style: italic; line-height: 1.6; color: #2a2a2a; margin-bottom: .65rem;
+    }
+    .endorse-source {
+      font-family: 'Inter', sans-serif; font-size: .68rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--slate-soft); font-weight: 600;
+    }
+
+    /* ── RECEIPTS / CLOSER ── */
+    .closer {
+      margin-top: 6rem; padding-top: 3rem; border-top: 2px solid var(--ink);
+    }
+    .closer-label {
+      font-family: 'Inter', sans-serif; font-size: .72rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--pos); font-weight: 700; margin-bottom: .5rem;
+    }
+    .closer h2 {
+      font-family: 'Iowan Old Style', Georgia, serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 500;
+      letter-spacing: -.005em; margin-bottom: .9rem; color: var(--ink);
+    }
+    .closer .lede {
+      font-family: 'Iowan Old Style', Georgia, serif; font-size: 1.02rem;
+      line-height: 1.65; color: var(--muted); max-width: 760px; margin-bottom: 1.8rem;
+    }
+    details.errata {
+      background: var(--card-bg); border: 1px solid var(--divider); border-radius: 6px;
+    }
+    details.errata > summary {
+      list-style: none; cursor: pointer; padding: 1rem 1.4rem;
+      display: flex; align-items: center; gap: .8rem;
+      font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 600;
+      color: var(--ink); letter-spacing: .02em;
+    }
+    details.errata > summary::-webkit-details-marker { display: none; }
+    details.errata > summary::before { content: '▸'; color: var(--pos); transition: transform .2s; display: inline-block; }
+    details.errata[open] > summary::before { transform: rotate(90deg); }
+    details.errata > summary:hover { background: rgba(45,134,89,.04); }
+    .errata-table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+    .errata-table th {
+      text-align: left; padding: .5rem .9rem; background: var(--paper-2);
+      border-top: 1px solid var(--divider); border-bottom: 2px solid var(--ink);
+      font-family: 'Inter', sans-serif; font-size: .66rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--slate); font-weight: 600;
+    }
+    .errata-table td {
+      padding: .55rem .9rem; border-bottom: 1px solid var(--divider);
+      vertical-align: top; line-height: 1.5;
+    }
+    .errata-table tr:last-child td { border-bottom: none; }
+    .errata-table .src-foot { padding: .7rem .9rem; font-family: 'Inter', sans-serif; font-size: .7rem; color: var(--slate-soft); letter-spacing: .06em; background: var(--paper-2); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2.6rem 2rem;
+      font-size: .78rem; color: var(--slate);
+      border-top: 1px solid var(--divider); background: var(--paper-2);
+      font-family: 'Inter', 'Helvetica Neue', sans-serif; letter-spacing: .015em;
+    }
+    footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(20,20,43,.2); }
+    footer a:hover { border-bottom-color: var(--ink); }
+
+    /* ── FADE-IN ── */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 640px) {
+      header.hero { padding: 3.5rem 1.2rem 3rem; }
+      .overview-table .hide-narrow { display: none; }
+      .bar { width: 80px; }
+      .ch-num { font-size: 2.2rem; }
+      .ch-title { font-size: 1.85rem; }
+      .line-count-grid { gap: .65rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="crosslink-strip">
+  <a href="the_murder_of_odysseus.html">← The Murder of Odysseus</a>
+  <span class="cl-sep">·</span>
+  <span class="current">The Complicated Man</span>
+</div>
+
+<header class="hero">
+  <div class="greek">Ὁμήρου Ὀδύσσεια · πολύτροπος</div>
+  <h1>The Complicated<br/><span class="accent">Man</span></h1>
+  <div class="dek">What the best contemporary readers of the Odyssey found when they went back to the original. The six strongest improvements.</div>
+  <div class="hero-meta">
+    Drawing on <a href="https://www.nytimes.com/2017/11/02/magazine/the-first-woman-to-translate-the-odyssey-into-english.html" target="_blank" rel="noopener">Wyatt Mason · NYT Magazine 2017</a>
+    &nbsp;·&nbsp; <a href="https://www.lrb.co.uk/the-paper/v40/n08/colin-burrow/light-through-the-fog" target="_blank" rel="noopener">Colin Burrow · LRB 2018</a>
+    &nbsp;·&nbsp; <a href="https://bmcr.brynmawr.edu/2018/2018.10.58/" target="_blank" rel="noopener">Corinne Pache · BMCR 2018</a>
+    &nbsp;·&nbsp; <a href="https://www.washingtonpost.com/entertainment/books/the-first-english-translation-of-the-odyssey-by-a-woman-was-worth-the-wait/2017/11/16/692cdf82-c59a-11e7-aae0-cb18a8c29c65_story.html" target="_blank" rel="noopener">Madeline Miller · Washington Post 2017</a>
+  </div>
+</header>
+
+<main>
+
+  <nav class="sidenav" aria-label="Section navigation">
+    <div class="sidenav-label">On this page</div>
+    <ul>
+      <li class="sn-c00"><a href="#ch-00"><span class="sn-dot"></span><span class="sn-num"></span><span class="sn-label">Comparison</span></a></li>
+      <li class="sn-c01"><a href="#ch-01"><span class="sn-dot"></span><span class="sn-num">01</span><span class="sn-label">Complicated</span></a></li>
+      <li class="sn-c02"><a href="#ch-02"><span class="sn-dot"></span><span class="sn-num">02</span><span class="sn-label">Every epithet</span></a></li>
+      <li class="sn-c03"><a href="#ch-03"><span class="sn-dot"></span><span class="sn-num">03</span><span class="sn-label">Line for line</span></a></li>
+      <li class="sn-c04"><a href="#ch-04"><span class="sn-dot"></span><span class="sn-num">04</span><span class="sn-label">The music</span></a></li>
+      <li class="sn-c05"><a href="#ch-05"><span class="sn-dot"></span><span class="sn-num">05</span><span class="sn-label">Slaves</span></a></li>
+      <li class="sn-c06"><a href="#ch-06"><span class="sn-dot"></span><span class="sn-num">06</span><span class="sn-label">The women</span></a></li>
+      <li class="sn-cH"><a href="#honours"><span class="sn-dot"></span><span class="sn-num"></span><span class="sn-label">The honours</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="main-col">
+
+  <!-- ══ TRANSLATIONS OVERVIEW TABLE ══ -->
+  <section class="chapter reveal ch-overview" id="ch-00">
+    <h2 class="ch-title">A Comparison of the 13 most significant Odyssey translations</h2>
+    <p class="ch-sub">1616–2025 · from George Chapman's Jacobean iambic pentameter to Daniel Mendelsohn's 2025 six-beat line.</p>
+
+  <details class="translations-table" open id="overview">
+    <summary>13 translations · 1616–2025 · click row to expand · click here to collapse table</summary>
+    <table class="overview-table">
+      <thead>
+        <tr>
+          <th style="width:22px"></th>
+          <th>Year</th>
+          <th style="width:22px"></th>
+          <th>Translator</th>
+          <th class="hide-narrow">Style</th>
+          <th class="center">Academic consensus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="era-row"><td colspan="6">Historical</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1616</td><td class="tbl-avail"></td><td><span class="tbl-name">George Chapman</span></td><td class="tbl-style hide-narrow">Iambic pentameter</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-hist" style="width:55%"></div></div><span class="bar-label">Literary-historical</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1725</td><td class="tbl-avail"></td><td><span class="tbl-name">Alexander Pope</span></td><td class="tbl-style hide-narrow">Heroic couplets</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-hist" style="width:45%"></div></div><span class="bar-label">Arnold's critique endures</span></div></td></tr>
+        <tr class="era-row"><td colspan="6">Modern (prose era)</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1946</td><td class="tbl-avail"></td><td><span class="tbl-name">E. V. Rieu</span></td><td class="tbl-style hide-narrow">Plain prose / novelistic</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:62%"></div></div><span class="bar-label">Popular; classicists sceptical</span></div></td></tr>
+        <tr class="era-row"><td colspan="6">Modern (verse translations)</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1961</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Robert Fitzgerald</span></td><td class="tbl-style hide-narrow">Flexible blank verse</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:88%"></div></div><span class="bar-label">Near-universal praise</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1965</td><td class="tbl-avail"></td><td><span class="tbl-name">Richmond Lattimore</span></td><td class="tbl-style hide-narrow">Loose hexameter</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:65%"></div></div><span class="bar-label">Scholarly standard; contested</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1980</td><td class="tbl-avail"></td><td><span class="tbl-name">Walter Shewring</span></td><td class="tbl-style hide-narrow">Faithful prose</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:74%"></div></div><span class="bar-label">Quietly respected</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">1996</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Robert Fagles</span></td><td class="tbl-style hide-narrow">Free verse, dramatic</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:82%"></div></div><span class="bar-label">Most widely taught</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2000</td><td class="tbl-avail"></td><td><span class="tbl-name">Stanley Lombardo</span></td><td class="tbl-style hide-narrow">Colloquial free verse</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-thin" style="width:50%"></div></div><span class="bar-label">Limited academic review</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2013</td><td class="tbl-avail"></td><td><span class="tbl-name">Stephen Mitchell</span></td><td class="tbl-style hide-narrow">Verse, colloquial</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-neg" style="width:28%"></div></div><span class="bar-label">Academic scepticism</span></div></td></tr>
+        <tr class="era-row"><td colspan="6">Contemporary</td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2016</td><td class="tbl-avail"></td><td><span class="tbl-name">Anthony Verity</span></td><td class="tbl-style hide-narrow">Plain prose, faithful</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:68%"></div></div><span class="bar-label">Reliable; lacks vitality</span></div></td></tr>
+        <tr class="trans-row" data-target="wilson"><td class="tbl-chevron">▸</td><td class="tbl-year">2017</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Emily Wilson</span></td><td class="tbl-style hide-narrow">Iambic pentameter, modern</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-mid" style="width:55%"></div></div><span class="bar-label">Landmark; deeply contested</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2018</td><td class="tbl-avail"></td><td><span class="tbl-name">Peter Green</span></td><td class="tbl-style hide-narrow">Six-beat line</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:70%"></div></div><span class="bar-label">Scholarly weight</span></div></td></tr>
+        <tr class="trans-row"><td class="tbl-chevron">▸</td><td class="tbl-year">2025</td><td class="tbl-avail"><span class="avail-icon has" title="In local ref/ folder">📗</span></td><td><span class="tbl-name">Daniel Mendelsohn</span></td><td class="tbl-style hide-narrow">Six-beat line, archaic</td><td><div class="bar-wrap"><div class="bar"><div class="bar-fill bar-pos" style="width:80%"></div></div><span class="bar-label">Early strong reception</span></div></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1.2rem;font-family:'Iowan Old Style',Georgia,serif;font-size:.92rem;color:var(--muted);font-style:italic;max-width:780px">
+      The four translators below (Robert Fagles, Robert Fitzgerald, Daniel Mendelsohn, and Emily Wilson) are the ones with full reference texts on hand for line-by-line comparison. Emily Wilson's is the only one this piece argues for.
+    </p>
+  </details>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §01: THE COMPLICATED MAN
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-01">
+    <div class="ch-num">01.</div>
+    <h2 class="ch-title">The complicated man</h2>
+    <p class="ch-sub">Every other translator chose a side — heroic, or evasive. Wilson is the only one who held the ambiguity Homer wrote.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 1.1</span>
+      <span class="ref-greek">πολύτροπος</span>
+      <span class="ref-gloss"><strong>Literal:</strong> "of many turns / ways." Simultaneously: cunning, resourceful, experienced — <em>and</em> devious, slippery, unreliable. The poem's first word about Odysseus. Homer refuses to tell you which reading is right. <span style="font-family:'Inter',sans-serif;font-size:.72rem;color:var(--pos);font-weight:600;letter-spacing:.05em">◆ green = what Wilson preserves · yellow = what the others lose</span></span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Sing in me, Muse, and through me tell the story</p>
+            <p class="hot">of that <mark class="hl-w">man skilled in all ways of contending</mark>,</p>
+            <p class="ctx">the wanderer, harried for years on end,</p>
+            <p class="ctx">after he plundered the stronghold</p>
+            <p class="ctx">on the proud height of Troy.</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.4rem">["skilled in all ways" — heroic only; the moral critique vanishes]</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Sing to me of the man, Muse, the <mark class="hl-w">man of twists and turns</mark></p>
+            <p class="hot">driven time and again off course, once he had plundered</p>
+            <p class="ctx">the hallowed heights of Troy.</p>
+            <p class="ctx">Many cities of men he saw and learned their minds,</p>
+            <p class="ctx">many pains he suffered, heartsick on the open sea…</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.4rem">["twists and turns" — spatial and physical; moral weight absent]</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Tell me the tale of a man, Muse, who had <mark class="hl-w">so many roundabout ways</mark></p>
+            <p class="hot">To wander, driven off course, after sacking Troy's hallowed keep;</p>
+            <p class="ctx">Many the peoples whose cities he saw and whose ways of thinking he learned,</p>
+            <p class="ctx">Many the toils he suffered at sea, anguish in his heart…</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.4rem">["roundabout ways" — evasive, but still spatial; loses the moral judgement]</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Tell me about a <mark class="hl-a-strong">complicated man</mark>.</p>
+            <p class="ctx">Muse, tell me how he wandered and was lost</p>
+            <p class="ctx">when he had wrecked the holy town of Troy,</p>
+            <p class="ctx">and where he went, and who he met, the pain</p>
+            <p class="ctx">he suffered in the storms at sea…</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.4rem">["complicated" — both heroic and morally questionable, simultaneously]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>Wyatt Mason, writing in the NYT Magazine in 2017, was <em class="quote">"floored"</em> by this opening. He was right to be. <span class="gk">πολύτροπος</span> is genuinely ambivalent in Greek: it can mean cunning and resourceful (a compliment), or devious and slippery (a warning). Every other translator forecloses that ambiguity by choosing one reading. "Skilled in all ways of contending" (Fitzgerald) lands entirely on heroism. "Twists and turns" (Fagles) is vivid but physical, not moral. "Roundabout ways" (Mendelsohn) is evasive without moral charge. <em class="quote">"Complicated"</em> is the only English word that holds both meanings at once: admirable and questionable, experienced and untrustworthy. Homer didn't tell us which reading was correct because he meant both.</p>
+      <p>Even Corinne Pache, who flags "complicated" as a weakness in her BMCR review, concedes the point: Wilson's translation is <em class="quote">"sturdier than the original: a bit less open-ended, less polytropic, less complicated."</em> Less complicated than πολύτροπος — which is still a richer reading than "man of twists and turns."</p>
+      <span class="src">Wyatt Mason · NYT Magazine, Nov 2, 2017 · Corinne Pache · BMCR 2018.10.58</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §02: EVERY EPITHET, EVERY TIME
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-02">
+    <div class="ch-num">02.</div>
+    <h2 class="ch-title">Every epithet, every time</h2>
+    <p class="ch-sub">Homer's formulas weren't decoration. Wilson translates what they do — and at Od. 9.1, the trickster announces himself before beginning four books of possibly tall tales.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 9.1</span>
+      <span class="ref-greek">πολύμητις · τὸν δ' ἀπαμειβόμενος προσέφη πολύμητις Ὀδυσσεύς</span>
+      <span class="ref-gloss">"Then in reply resourceful Odysseus addressed him." <span class="gk">πολύμητις</span> = "of many counsels / wiles / resources." The standard epithet for Odysseus's intelligence. Here he is about to speak for four consecutive books (9–12) — the most extended, and most questionable, narrative in the epic.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot"><mark class="hl-w">Resourceful Odysseus</mark> answered him and said:</p>
+            <p class="ctx">"Alcinous, king and admiration of men,</p>
+            <p class="ctx">how beautiful this is, to hear a minstrel</p>
+            <p class="ctx">gifted as yours…</p>
+            <p class="ctx" style="margin-top:.8rem">[Od. 9.19–20] I am Laertes' son, Odysseus.</p>
+            <p class="hot">Men hold me <mark class="hl-w">formidable for guile</mark></p>
+            <p class="hot">in peace and war: this fame has gone abroad."</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot"><mark class="hl-w">The great tactician</mark> answered, turning to him:</p>
+            <p class="ctx">"Alcinous, majesty, shining among your island people,</p>
+            <p class="ctx">what a fine thing it is to listen to such a bard…</p>
+            <p class="ctx" style="margin-top:.8rem">[Od. 9.19–20] I am Odysseus, son of Laertes,</p>
+            <p class="hot">known to the world for <mark class="hl-w">every kind of craft</mark> —</p>
+            <p class="hot">my fame goes up to the heavens."</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Then <mark class="hl-w">much-contriving Odysseus</mark> answered him:</p>
+            <p class="ctx">"Alcinous, lord of all, great among your people,</p>
+            <p class="ctx">truly it is a fine thing to hear a singer such as this…</p>
+            <p class="ctx" style="margin-top:.8rem">[Od. 9.19–20] I am Odysseus, son of Laertes,</p>
+            <p class="hot">who am known among all men for <mark class="hl-w">my craftiness</mark>;</p>
+            <p class="hot">my fame goes up to heaven."</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Then <mark class="hl-a-strong">wily Odysseus, the lord of lies</mark>, replied:</p>
+            <p class="ctx">"Alcinous, great among all peoples, truly</p>
+            <p class="ctx">it is a lovely thing to hear a singer…</p>
+            <p class="ctx" style="margin-top:.8rem">[Od. 9.19–20] I am Odysseus, Laertes' son.</p>
+            <p class="hot">All the world knows me: <mark class="hl-a">my tricks, my guile</mark>.</p>
+            <p class="hot">My fame reaches to heaven."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>At Od. 9.1, Odysseus is about to speak for the next four books — the Cyclops, the Sirens, Scylla and Charybdis, Circe, the underworld. These are the most famous passages in the epic, and also the most self-serving: Odysseus is his own narrator. Wilson's <em class="quote">"the lord of lies"</em> is not a mistranslation of <span class="gk">πολύμητις</span> — it is a contextually precise rendering of the epithet's resonance at this particular moment. Homer's epithet system did structural work in oral performance. "Resourceful" (Fitzgerald) or "great tactician" (Fagles) remain constant across all occurrences, ignoring that resonance. Wilson varies the epithet to provide, as Colin Burrow observed, <em class="quote">"a running commentary on emotional and social relationships."</em></p>
+      <span class="src">Colin Burrow · LRB Vol. 40 No. 8, April 26, 2018 · Marguerite Johnson · Australian Book Review, December 2018</span>
+    </div>
+
+    <!-- Epithet range table -->
+    <div class="epithet-table-wrap">
+      <h4>Wilson's epithet vocabulary — the full range</h4>
+      <table class="epithet-table">
+        <thead><tr><th>Greek epithet</th><th>Standard rendering (others)</th><th>Wilson's range</th><th>Context</th></tr></thead>
+        <tbody>
+          <tr><td class="gk">πολύτροπος</td><td>"man of twists and turns" / "skilled in all ways"</td><td class="wilson">"complicated man" / "the man who can adapt to anything"</td><td>Od. 1.1 — the opening; moral ambiguity preserved</td></tr>
+          <tr><td class="gk">πολύμητις</td><td>"resourceful" (frozen at every occurrence)</td><td class="wilson">"cunning" / "warily" / "the lord of lies" / "the mastermind"</td><td>Varied by emotional register of the scene</td></tr>
+          <tr><td class="gk">πολύτλας</td><td>"much-enduring" / "long-suffering"</td><td class="wilson">"hardened" / "resilient"</td><td>Moments of endurance under duress</td></tr>
+          <tr><td class="gk">πτολίπορθος</td><td>"sacker of cities"</td><td class="wilson">"who sacked the city" / "who destroyed Troy"</td><td>Active verb form: Wilson shows the action rather than conferring the title</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §03: ONE LINE FOR ONE LINE
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-03">
+    <div class="ch-num">03.</div>
+    <h2 class="ch-title">One line for one line</h2>
+    <p class="ch-sub">Homer's Odyssey is 12,110 lines. Wilson's English translation is 12,110 lines, in iambic pentameter. No other major translator even attempted it.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 1.1–10</span>
+      <span class="ref-greek">the proem · ten Greek lines</span>
+      <span class="ref-gloss">The opening ten lines of the Odyssey. Count the lines each translator uses for the same Greek span. Fitzgerald's blank verse expands. Mendelsohn's six-beat line produces fewer but far longer lines. Wilson's iambic pentameter: ten lines for ten.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Sing in me, Muse, and through me tell the story</p>
+            <p class="hot">of that man skilled in all ways of contending,</p>
+            <p class="hot">the wanderer, harried for years on end,</p>
+            <p class="hot">after he plundered the stronghold</p>
+            <p class="hot">on the proud height of Troy.</p>
+            <p class="hot">He saw the townlands</p>
+            <p class="hot">and learned the minds of many distant men,</p>
+            <p class="hot">and weathered many bitter nights and days</p>
+            <p class="hot">in his deep heart at sea, while he fought only</p>
+            <p class="hot">to save his life, to bring his shipmates home.</p>
+            <p class="hot">But not by will nor valor could he save them,</p>
+            <p class="hot">for their own recklessness destroyed them all —</p>
+            <p class="hot">children and fools, they killed and feasted on</p>
+            <p class="hot">the cattle of Lord Hēlios, the Sun…</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.5rem"><em>~14 lines for 10 Greek lines (40% expansion)</em></p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Sing to me of the man, Muse, the man of twists and turns</p>
+            <p class="hot">driven time and again off course, once he had plundered</p>
+            <p class="hot">the hallowed heights of Troy.</p>
+            <p class="hot">Many cities of men he saw and learned their minds,</p>
+            <p class="hot">many pains he suffered, heartsick on the open sea,</p>
+            <p class="hot">fighting to save his life and bring his comrades home.</p>
+            <p class="hot">But he could not save them from disaster, hard as he strove —</p>
+            <p class="hot">the recklessness of their own ways destroyed them all,</p>
+            <p class="hot">the blind fools, they devoured the cattle of the Sun…</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.5rem"><em>~9 lines for 9 Greek lines — but each line is ~50% longer than Homer's</em></p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Tell me the tale of a man, Muse, who had so many roundabout ways</p>
+            <p class="hot">To wander, driven off course, after sacking Troy's hallowed keep;</p>
+            <p class="hot">Many the peoples whose cities he saw and whose ways of thinking he learned,</p>
+            <p class="hot">Many the toils he suffered at sea, anguish in his heart</p>
+            <p class="hot">As he struggled to safeguard his life and the homecoming of his companions.</p>
+            <p class="hot">But he did not save his companions even so, though he longed to,</p>
+            <p class="hot">For their heedlessness destroyed them, theirs and nobody else's —</p>
+            <p class="hot">Fools that they were, like children, who devoured the sun-god Hyperion's cattle…</p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.5rem"><em>~8 lines — but each six-beat line is much longer, carrying ~70% more syllables</em></p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot"><mark class="hl-a">Tell me about a complicated man.</mark></p>
+            <p class="hot"><mark class="hl-a">Muse, tell me how he wandered and was lost</mark></p>
+            <p class="hot"><mark class="hl-a">when he had wrecked the holy town of Troy,</mark></p>
+            <p class="hot"><mark class="hl-a">and where he went, and who he met, the pain</mark></p>
+            <p class="hot"><mark class="hl-a">he suffered in the storms at sea, and how</mark></p>
+            <p class="hot"><mark class="hl-a">he worked to save his life and bring his men</mark></p>
+            <p class="hot"><mark class="hl-a">back home. He failed to keep them safe; poor fools,</mark></p>
+            <p class="hot"><mark class="hl-a">they ate the Sun God's cattle, and the god</mark></p>
+            <p class="hot"><mark class="hl-a">kept them from home. Now goddess, child of Zeus,</mark></p>
+            <p class="hot"><mark class="hl-a">tell us their story, starting anywhere.</mark></p>
+            <p class="ctx" style="font-size:.78rem;color:#aaa;margin-top:.5rem"><em>10 lines for 10 Greek lines — iambic pentameter throughout</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>Wilson is the only translator of a major modern English Odyssey to maintain a strict line-for-line correspondence with Homer across the entire poem. Colin Burrow identifies this as the discipline that generates her translation's insights: it forces <em class="quote">"sharp and sometimes simplifying decisions about which of Homer's implications to make explicit"</em> — and those decisions, compelled by the constraint, often produce the clearest possible rendering of what the Greek is actually doing. Madeline Miller, writing in the Washington Post, called the achievement <em class="quote">"impressively limiting herself to the same number of lines as Homer's original"</em> — rare in the history of English Homer.</p>
+      <span class="src">Colin Burrow · LRB 2018 · Madeline Miller · Washington Post, Nov 16, 2017 · Wilson's translator's introduction, Norton 2017</span>
+    </div>
+
+    <!-- Line count stat block -->
+    <div class="line-count-grid">
+      <div class="line-count-card">
+        <div class="lc-name">Homer (Greek)</div>
+        <div class="lc-num">12,110</div>
+        <div class="lc-label">dactylic hexameter</div>
+      </div>
+      <div class="line-count-card is-wilson">
+        <div class="lc-name">Emily Wilson (2017)</div>
+        <div class="lc-num">12,110</div>
+        <div class="lc-label">iambic pentameter · exact match ✓</div>
+      </div>
+      <div class="line-count-card">
+        <div class="lc-name">Robert Fagles (1996)</div>
+        <div class="lc-num">~12,500+</div>
+        <div class="lc-label">free verse · expands by ~4%</div>
+      </div>
+      <div class="line-count-card">
+        <div class="lc-name">Robert Fitzgerald (1961)</div>
+        <div class="lc-num">~13,000+</div>
+        <div class="lc-label">flexible blank verse · expands by ~8%</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §04: THE MUSIC HOMER HAD
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-04">
+    <div class="ch-num">04.</div>
+    <h2 class="ch-title">The music Homer had</h2>
+    <p class="ch-sub">Homer's hexameter was regular, rhythmical, meant to be sung. Wilson's iambic pentameter is the English equivalent. Most of her predecessors abandoned metre entirely.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 5.61–68</span>
+      <span class="ref-greek">ᾄδουσα · λίγ' ἀοιδῆς · ὕλη ἐπήρεφε</span>
+      <span class="ref-gloss">Hermes arrives at Calypso's cave. The passage is a set-piece of Homeric descriptive writing: sounds, scents, birds, forest, springs. Colin Burrow (LRB 2018) singles out Wilson's rendering of this passage as an exemplar of her translation's musical quality.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">She had a voice; her spinning song rang out</p>
+            <p class="hot">upon the island. Tall trees grew in ranks</p>
+            <p class="hot">around the cave — sweet-smelling alder,</p>
+            <p class="hot">black poplar, scented cypress. There</p>
+            <p class="hot">the long-winged birds would nest: the horned owl,</p>
+            <p class="hot">the hawk, the cormorant roaming the salt sea.</p>
+            <p class="hot">A great vine trailed its clusters across the cave.</p>
+            <p class="hot">Four springs ran sparkling, side by side…</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">She was singing inside, her lovely voice rang out</p>
+            <p class="hot">as she wove at her loom, her golden shuttle flying.</p>
+            <p class="hot">Round the cave a great forest had grown up, blooming:</p>
+            <p class="hot">alder and black poplar, fragrant cypress.</p>
+            <p class="hot">Long-winged birds nested there — owls and hawks</p>
+            <p class="hot">and the chattering sea-crows who work the waves.</p>
+            <p class="hot">Right at the cave's mouth a vine ran wide,</p>
+            <p class="hot">heavy with grapes. Four springs ran clear and bright…</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Inside she was singing with a lovely voice</p>
+            <p class="hot">while moving at her great loom, weaving with golden thread.</p>
+            <p class="hot">Round about the cave a forest had grown up blooming:</p>
+            <p class="hot">alder and black poplar and fragrant cypress,</p>
+            <p class="hot">and there the long-winged birds made their nests —</p>
+            <p class="hot">owls and hawks and the chattering sea-crows.</p>
+            <p class="hot">Right at the cave's mouth a vine stretched out in flower,</p>
+            <p class="hot">heavy with clusters ripe. Four springs close-set ran clear…</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">A great fire burned, and cedar split on coals</p>
+            <p class="hot">spread fragrance through the island. She was singing:</p>
+            <p class="hot"><mark class="hl-a-strong">her voice was beautiful. Around the cave</mark></p>
+            <p class="hot"><mark class="hl-a-strong">a luscious forest flourished</mark>: alder trees,</p>
+            <p class="hot">black poplar, fragrant cypress. Long-winged birds</p>
+            <p class="hot">had built their nests there: owls, and hawks, and those</p>
+            <p class="hot">dark-calling sea-crows. <mark class="hl-a-strong">It was full of wings.</mark></p>
+            <p class="hot">A great vine trailed the cave's broad mouth, in bloom,</p>
+            <p class="hot">heavy with grapes. Four close-set springs ran clear…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>Read Wilson's lines aloud. <em class="quote">"Her voice was beautiful. Around the cave / a luscious forest flourished."</em> The sentence breaks exactly at the line-end, the stress falls naturally on every second syllable: <em>her VOICE was BEAU-ti-FUL. a-ROUND the CAVE.</em> This is what regular metre does — it makes the prose readable aloud, the way Homer's Greek was always meant to be heard. Wilson's introduction argues that most modern translations have abandoned this: <em class="quote">"all the commonly-read versions … are lacking in metrical regularity"</em> — the result is text that reads like heightened prose but lacks the pulse. Josephine Balmer (New Statesman, 2018) called Wilson's versification <em class="quote">"fluid and immensely readable,"</em> blowing away <em class="quote">"the cobwebs of pseudo-archaisms or epic pomposity."</em></p>
+      <p>Colin Burrow singles out Wilson's <em class="quote">"It was full of wings"</em> — three words for Homer's description of the cave's bird life — as the kind of sharp compression her formal constraint produces. Not "long-winged birds nested there," not "the long-winged birds made their nests": just the pure sensory fact, stripped to its feathers.</p>
+      <span class="src">Colin Burrow · LRB Vol. 40 No. 8, April 26, 2018 · Josephine Balmer · New Statesman, January 21, 2018 · Wilson's translator's introduction, Norton 2017</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §05: NOT "MAIDS" — SLAVES
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-05">
+    <div class="ch-num">05.</div>
+    <h2 class="ch-title">Not "maids" — slaves</h2>
+    <p class="ch-sub">The enslaved women were hanged after the suitor slaughter. Previous translators called them "maids." Wilson refuses the euphemism.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 22.437–447</span>
+      <span class="ref-greek">δμωαί · ἐϋπλέκτῳ βρόχῳ</span>
+      <span class="ref-gloss"><span class="gk">δμωαί</span> = enslaved women, owned property of the household, subject to the sexual demands of whoever was in control. Telemachus hangs twelve of them after the suitor massacre because they had slept with the suitors. They were not given a choice. Wilson translates <span class="gk">δμωαί</span> as "slaves" throughout the poem — the only accurate English word for their legal and social status.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">"These <mark class="hl-w">women</mark>, then, shall have no clean death: not I,</p>
+            <p class="hot">who lay in the arms of young men while dishonor</p>
+            <p class="hot">fell on the Lady and their master's name."</p>
+            <p class="ctx">He roped together the ship's hawser round</p>
+            <p class="ctx">the column of the hall's great dome, then swung it</p>
+            <p class="ctx">up high so none could touch the ground.</p>
+            <p class="ctx">Like thrushes caught in a net spread in the thicket,</p>
+            <p class="ctx">each <mark class="hl-w">woman</mark> found her noose…</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">"No clean death for the likes of them, by god —</p>
+            <p class="hot">not from me. They showered disgrace on the head</p>
+            <p class="hot">of my mother, shared the beds of suitors."</p>
+            <p class="ctx">He roped the prow-cable of a dark-prowed ship</p>
+            <p class="ctx">around the great column, stretched it up high</p>
+            <p class="ctx">so that no foot could touch the ground.</p>
+            <p class="ctx">Like thrushes or doves who fly into a net —</p>
+            <p class="ctx">the <mark class="hl-w">women</mark> were strung there in a row…</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">"I will not grant a clean death to these <mark class="hl-w">serving-women</mark></p>
+            <p class="hot">who poured dishonour on my mother's head</p>
+            <p class="hot">and lay beside the suitors in their beds."</p>
+            <p class="ctx">He took the cable of a dark-prowed ship</p>
+            <p class="ctx">and made it fast about the great round pillar,</p>
+            <p class="ctx">cast it so high no foot could touch the ground.</p>
+            <p class="ctx">Like thrushes or like doves who fly to rest</p>
+            <p class="ctx">into a net — the <mark class="hl-w">serving-women</mark> held their heads in a row…</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">"I will not grant an honorable death</p>
+            <p class="hot">to <mark class="hl-a-strong">slaves</mark> who brought dishonor on my mother</p>
+            <p class="hot">and shared the suitors' beds."</p>
+            <p class="ctx">He roped the cable of a dark-prowed ship</p>
+            <p class="ctx">around the great pillar and stretched it up high</p>
+            <p class="ctx">so that no foot could reach the ground.</p>
+            <p class="ctx">Like thrushes or like doves that fly into</p>
+            <p class="ctx">a net spread in the thicket — the <mark class="hl-a-strong">slaves</mark>'</p>
+            <p class="ctx">necks were roped together in a line…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>Madeline Miller (Washington Post, 2017) makes the argument directly: calling these women "maids" or "serving-women" prevents readers from registering <em class="quote">"this really horrific thing that happened."</em> These women were owned. Their sleeping with the suitors was not infidelity, not poor judgment, not a moral failing for which they bore any choice. It was coercion by the men who controlled the household during Odysseus's absence. Wilson's "slaves" is not an anachronism or a flattening — it is the only English word that makes their status, and therefore their death, fully visible.</p>
+      <p>Wilson's translator's introduction addresses this directly: she argues that earlier translators' softened vocabulary — "maids," "handmaidens," "serving-women," "girls" — imports a Downton Abbey register that Homer never intended. The Greek <span class="gk">δμωαί</span> denotes owned property. That word is available in English. Wilson uses it.</p>
+      <span class="src">Madeline Miller · Washington Post, Nov 16, 2017 · Wilson's translator's introduction, Norton 2017 · Corinne Pache · BMCR 2018.10.58</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       §06: THE WOMEN HOMER SAW
+       ══════════════════════════════════════════════════════════════════ -->
+  <section class="chapter reveal" id="ch-06">
+    <div class="ch-num">06.</div>
+    <h2 class="ch-title">The women Homer saw</h2>
+    <p class="ch-sub">Penelope has been weaving for twenty years. Homer gives her a master craftsperson's hands. Most translators gave her softer ones.</p>
+
+    <div class="ref-strip">
+      <span class="ref-loc">Od. 21.5–8</span>
+      <span class="ref-greek">χειρὶ παχείῃ</span>
+      <span class="ref-gloss">"With her thick / strong hand." Penelope reaches for the great bow to set the contest that will decide her fate. <span class="gk">παχύς</span> = thick, stout, heavy — the hand of a skilled craftsperson, not a decorative aristocrat. Corinne Pache (BMCR 2018) singles this passage out: Wilson's rendering is <em>"more striking"</em> than any competitor's.</span>
+    </div>
+
+    <div class="diff-hero">
+      <div class="diff-grid">
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fitzgerald</span><span class="diff-year">1961</span></div>
+            <div class="consensus" data-tip="Academic consensus: Near-universal praise"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:88%"></div></div><span class="consensus-label">Near-universal praise</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Then Penelope, with aching heart,</p>
+            <p class="hot">made her way to the far storeroom of the house,</p>
+            <p class="hot">where the lord's treasures lay in heaps of bronze,</p>
+            <p class="hot">gold, and iron, finely wrought…</p>
+            <p class="hot">She took the great bow down from off its peg</p>
+            <p class="hot"><mark class="hl-w">with both hands</mark>, still in its polished case,</p>
+            <p class="hot">and sat down there and laid it on her knees</p>
+            <p class="hot">and wept aloud for her husband far away.</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Robert Fagles</span><span class="diff-year">1996</span></div>
+            <div class="consensus" data-tip="Academic consensus: Most widely taught"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:82%"></div></div><span class="consensus-label">Most widely taught</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">And now thoughtful Penelope climbed to the storeroom,</p>
+            <p class="hot">that far room of the lofty house, where the treasures</p>
+            <p class="hot">of her husband lay: bronze, gold, and wrought iron.</p>
+            <p class="hot">There she reached up and unhooked the great bow</p>
+            <p class="hot"><mark class="hl-w">from its peg with her own hands</mark>, still in its case,</p>
+            <p class="hot">and sat down there and spread it on her knees</p>
+            <p class="hot">and wept aloud, and drew out her husband's bow.</p>
+          </div>
+        </div>
+        <div class="diff-col">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author">Daniel Mendelsohn</span><span class="diff-year">2025</span></div>
+            <div class="consensus" data-tip="Academic consensus: Early strong reception"><div class="consensus-bar"><div class="consensus-fill c-pos" style="width:80%"></div></div><span class="consensus-label">Early strong reception</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Then thoughtful Penelope went to the storeroom</p>
+            <p class="hot">of the lofty palace, where the owner's treasures lay —</p>
+            <p class="hot">bronze and gold and iron finely worked.</p>
+            <p class="hot">There she reached up and with <mark class="hl-w">her broad hand</mark></p>
+            <p class="hot">took down the bow still in its gleaming case,</p>
+            <p class="hot">and sat and spread it on her knees,</p>
+            <p class="hot">and wept aloud, and drew her husband's bow out.</p>
+          </div>
+        </div>
+        <div class="diff-col diff-col-wilson">
+          <div class="diff-col-head">
+            <div class="diff-author-row"><span class="diff-author is-wilson">Emily Wilson</span><span class="diff-year">2017</span></div>
+            <div class="consensus" data-tip="Academic consensus: Landmark; deeply contested"><div class="consensus-bar"><div class="consensus-fill c-mid" style="width:55%"></div></div><span class="consensus-label">Landmark; deeply contested</span></div>
+          </div>
+          <div class="diff-body">
+            <p class="hot">Now thoughtful Penelope went to the storeroom</p>
+            <p class="hot">of the tall palace, where her husband's treasures,</p>
+            <p class="hot">copper and gold and iron, were all stored.</p>
+            <p class="hot">She lifted with <mark class="hl-a-strong">her muscular, firm hand</mark></p>
+            <p class="hot">the great bow, still inside its polished case,</p>
+            <p class="hot">and sat and laid it on her knees and wept</p>
+            <p class="hot">aloud, and drew her husband's bow out…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aftermath">
+      <p>Corinne Pache calls Wilson's <em class="quote">"muscular, firm hand"</em> for <span class="gk">χειρὶ παχείῃ</span> <em class="quote">"more striking"</em> than any competitor — and it is. Penelope is not an idle queen waiting by a window. She has been weaving for twenty years, unpicking by night what she wove by day. Her hands are a craftsperson's hands: thick, trained, strong. Fitzgerald's "both hands" neutralises the Greek. Fagles' "her own hands" and Mendelsohn's "broad hand" approach the Greek without getting there. Wilson's "muscular, firm hand" is the only rendering that honours what Homer actually wrote — and what it means for who Penelope is.</p>
+      <p>Madeline Miller flags the same passage: Wilson's Penelope has <em class="quote">"muscular"</em> hands that <em class="quote">"honor the character's craft rather than sexualising her."</em> This is not a small interpretive choice. It is the difference between a decorative character and a woman whose body has been shaped by twenty years of survival.</p>
+      <span class="src">Corinne Pache · BMCR 2018.10.58 · Madeline Miller · Washington Post, Nov 16, 2017 · Wilson's translator's introduction, Norton 2017</span>
+    </div>
+
+    <!-- And also: other female characters -->
+    <div class="also-group">
+      <div class="also-group-label">And also: other women Wilson restores</div>
+
+      <details class="also">
+        <summary>
+          <span class="also-chev">▸</span>
+          <span class="also-label">Calypso: goddess, not obstacle</span>
+          <span class="also-ref">Od. 5.55–75 · <span class="gk">θεὸς αὐδήεσσα</span></span>
+        </summary>
+        <div class="also-body">
+          <div class="aftermath" style="margin-top:0;border-left:2px solid var(--divider)">
+            <p>Earlier translators tend to frame Calypso as an obstacle to Odysseus's homecoming — a seductress who delays his return. Wilson's translation treats her as what the Greek calls her: a <span class="gk">θεὸς αὐδήεσσα</span>, a goddess who speaks. Her cave is described with genuine beauty ("Her voice was beautiful. Around the cave / a luscious forest flourished"). Her grief at losing Odysseus is rendered without diminishment. Wilson's introduction argues that previous (male) translators' tendency to flatten female characters into obstacles or victims is itself an interpretive choice — and one she deliberately refuses.</p>
+            <span class="src">Wilson's translator's introduction, Norton 2017 · Corinne Pache · BMCR 2018.10.58</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="also">
+        <summary>
+          <span class="also-chev">▸</span>
+          <span class="also-label">Nausicaa: Wilson's "like a sail" simile</span>
+          <span class="also-ref">Od. 6.99–101 · <span class="gk">ἱστίῳ ἠύτε</span></span>
+        </summary>
+        <div class="also-body">
+          <div class="aftermath" style="margin-top:0;border-left:2px solid var(--divider)">
+            <p>When Nausicaa stands apart from her companions, Homer uses a simile comparing her to a poplar or a ship's mast. Wilson's rendering of the simile — "like a sail" — for the comparison of Nausicaa amid her companions conveys, in Corinne Pache's phrase, <em class="quote">"the metaphorical register"</em> of the Greek with striking clarity. Where other translations render the image as a static architectural comparison, Wilson catches the dynamism: a sail fills and moves; it is shaped by wind and direction. This is a Nausicaa who is going somewhere.</p>
+            <span class="src">Corinne Pache · BMCR 2018.10.58</span>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       CLOSER: THE HONOURS
+       ══════════════════════════════════════════════════════════════════ -->
+  <div class="closer reveal" id="honours">
+    <div class="closer-label">The honours</div>
+    <h2>The critical case, set out</h2>
+    <p class="lede">
+      Wilson's translation was greeted as a landmark event by a wide range of critics, classicists, and novelists working with the classical tradition. The passages above are not the full case — they are six of the strongest specific arguments. The four critics below represent the range of that reception.
+    </p>
+
+    <div class="endorsements">
+      <div class="endorse-card">
+        <div class="endorse-quote">"Floored" by the opening lines. "Small but radical changes to the way many key scenes of the epic are presented." Highlighted Wilson's "radically contemporary voice" and her achievement of matching Homer's 12,110-line count in iambic pentameter as technically extraordinary.</div>
+        <div class="endorse-source">Wyatt Mason · NYT Magazine, November 2, 2017 · "The First Woman to Translate the Odyssey into English"</div>
+      </div>
+      <div class="endorse-card">
+        <div class="endorse-quote">"An amazing achievement, a thrill to read, and the best English translation … sturdier than the original: a bit less open-ended, less polytropic, less complicated." Praised the "muscular, firm hand" passage as "more striking" than all competitors.</div>
+        <div class="endorse-source">Corinne Pache · Bryn Mawr Classical Review 2018.10.58 · Trinity University, San Antonio</div>
+      </div>
+      <div class="endorse-card">
+        <div class="endorse-quote">Wilson's epithet strategy gives Homer's repeated formulas "a range of phrases which provide a running commentary on emotional and social relationships." The translation is "full of insights" and offers "a perceptive reading of The Odyssey." Acknowledged the extraordinary difficulty of matching 12,110 hexameter lines in iambic pentameter.</div>
+        <div class="endorse-source">Colin Burrow · London Review of Books, April 26, 2018 · All Souls College, Oxford</div>
+      </div>
+      <div class="endorse-card">
+        <div class="endorse-quote">"Absolutely brilliant and amazing." "Fresh, unpretentious and lean." Praised Wilson's choice of "slave" over "maid" for preventing readers from overlooking "this really horrific thing that happened." "Creates real suspense where other translations make the reader glaze over."</div>
+        <div class="endorse-source">Madeline Miller · Washington Post, November 16, 2017 · author of Circe and The Song of Achilles</div>
+      </div>
+    </div>
+
+    <details class="errata">
+      <summary>Recognition and awards (click to expand)</summary>
+      <table class="errata-table">
+        <thead><tr><th>Award / Recognition</th><th>Year</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>MacArthur Fellowship ("Genius Grant")</td><td>2019</td><td>Awarded in significant part for the Odyssey translation; citation: "bringing classical literature to new audiences"</td></tr>
+          <tr><td>NYT 100 Notable Books</td><td>2018</td><td>Named one of the New York Times's 100 most notable books of 2018</td></tr>
+          <tr><td>ALTA National Translation Award (shortlist)</td><td>2018</td><td>Shortlisted for the American Literary Translators Association's highest prize</td></tr>
+          <tr><td>Charlotte Higgins, The Guardian</td><td>Dec 2017</td><td>"A new cultural landmark" — "crisp and musical version … will change the way the poem is read in English"</td></tr>
+          <tr><td>Josephine Balmer, New Statesman</td><td>Jan 2018</td><td>"Fluid and immensely readable versification" — "blowing away the cobwebs of pseudo-archaisms or epic pomposity"</td></tr>
+          <tr><td>Marguerite Johnson, Australian Book Review</td><td>Dec 2018</td><td>"May be the definitive modern English Odyssey for contemporary readers … without peer"</td></tr>
+          <tr><td>Classroom adoption</td><td>2018–present</td><td>Increasingly standard in undergraduate Classics and Comparative Literature curricula; displacing Fagles and Lombardo in a number of US programmes</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td class="src-foot" colspan="3">Sources: public records; ALTA announcement; Wilson's Wikipedia article; Harvard Gazette Feb 2018; RESEARCH.md</td></tr>
+        </tfoot>
+      </table>
+    </details>
+  </div>
+
+  </div><!-- /.main-col -->
+</main>
+
+<footer>
+  Source reviews: <a href="https://www.nytimes.com/2017/11/02/magazine/the-first-woman-to-translate-the-odyssey-into-english.html" target="_blank" rel="noopener">Wyatt Mason · NYT Magazine 2017</a>
+  &nbsp;·&nbsp; <a href="https://www.lrb.co.uk/the-paper/v40/n08/colin-burrow/light-through-the-fog" target="_blank" rel="noopener">Colin Burrow · LRB 2018</a>
+  &nbsp;·&nbsp; <a href="https://bmcr.brynmawr.edu/2018/2018.10.58/" target="_blank" rel="noopener">Corinne Pache · BMCR 2018.10.58</a>
+  &nbsp;·&nbsp; <a href="https://www.washingtonpost.com/entertainment/books/the-first-english-translation-of-the-odyssey-by-a-woman-was-worth-the-wait/2017/11/16/692cdf82-c59a-11e7-aae0-cb18a8c29c65_story.html" target="_blank" rel="noopener">Madeline Miller · Washington Post 2017</a>
+  &nbsp;·&nbsp; The critical case against Wilson is at <a href="the_murder_of_odysseus.html">the_murder_of_odysseus.html</a>.
+</footer>
+
+<script>
+(function () {
+  // Fade-in on scroll
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Sidebar scrollspy
+  var sections = document.querySelectorAll('section.chapter, .closer');
+  var navLinks = document.querySelectorAll('.sidenav a');
+  if (!sections.length || !navLinks.length) return;
+  var linkMap = {};
+  navLinks.forEach(function (a) {
+    var href = a.getAttribute('href');
+    if (href && href.charAt(0) === '#') linkMap[href.slice(1)] = a;
+  });
+  function setActive(id) {
+    navLinks.forEach(function (a) { a.classList.remove('active'); });
+    if (linkMap[id]) linkMap[id].classList.add('active');
+  }
+  if ('IntersectionObserver' in window) {
+    var visible = {};
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible[e.target.id] = e.intersectionRatio;
+        else delete visible[e.target.id];
+      });
+      var best = null, bestRatio = 0;
+      for (var id in visible) {
+        if (visible[id] > bestRatio) { bestRatio = visible[id]; best = id; }
+      }
+      if (!best) {
+        var pivot = window.innerHeight * 0.35;
+        var lastAbove = null;
+        sections.forEach(function (s) {
+          if (s.getBoundingClientRect().top < pivot) lastAbove = s.id;
+        });
+        best = lastAbove;
+      }
+      if (best) setActive(best);
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.2, 0.5, 1] });
+    sections.forEach(function (s) { if (s.id) spy.observe(s); });
+  }
+
+  // Expandable table rows (same as murder page)
+  var rows = document.querySelectorAll('.trans-row');
+  rows.forEach(function(row) {
+    row.addEventListener('click', function() {
+      var target = this.getAttribute('data-target');
+      var detailsRow = this.nextElementSibling;
+      if (detailsRow && detailsRow.classList.contains('details-row')) {
+        var isOpen = detailsRow.classList.contains('open');
+        detailsRow.classList.toggle('open', !isOpen);
+        this.classList.toggle('expanded', !isOpen);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

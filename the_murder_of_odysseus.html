@@ -895,9 +895,36 @@
       .errata-table { font-size: .8rem; }
       .errata-table th, .errata-table td { padding: .4rem .55rem; }
     }
+
+    /* ── CROSS-LINK STRIP ── */
+    .crosslink-strip {
+      background: var(--ink-2);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: .55rem 1.5rem;
+      font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
+      font-size: .8rem;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.45);
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .crosslink-strip a {
+      color: rgba(255,255,255,.6);
+      text-decoration: none;
+    }
+    .crosslink-strip a:hover { color: #fff; }
+    .crosslink-strip .current { color: rgba(255,255,255,.35); }
+    .crosslink-strip .cl-sep { color: rgba(255,255,255,.2); }
   </style>
 </head>
 <body>
+
+<div class="crosslink-strip">
+  <span class="current">← The Murder of Odysseus</span>
+  <span class="cl-sep">·</span>
+  <a href="the_complicated_man.html">The Complicated Man →</a>
+</div>
 
 <header class="hero">
   <div class="greek">Ὁμήρου Ὀδύσσεια</div>
